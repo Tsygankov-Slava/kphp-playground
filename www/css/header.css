@@ -1,0 +1,53 @@
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 100;
+    background-color: #1e1f22;
+}
+
+.header__vacuum {
+    height: 120px;
+}
+
+.header__inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px;
+}
+
+.header__logo {
+    display: flex;
+    flex-direction: row;
+}
+
+.header__logo span {
+    font-family: 'JetBrains Mono', monospace;
+    color: white;
+    font-size: 130%;
+}
+
+.header__contents {
+    position: absolute;
+    right: 2%;
+    display: flex;
+    align-items: baseline;
+}
+
+.header__contents div {
+    margin-left: 30px;
+    width: auto;
+}
+
+.header__contents a {
+    font-family: 'JetBrains Mono', monospace;
+    color: #B8B8B8;
+    text-decoration: none;
+}
+
+.header__contents a:hover {
+    color: white;
+}

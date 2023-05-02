@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>KPHP Playground</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css"/>
+    <link rel="stylesheet" href="js/codemirror/themes/friendship-bracelet.css"/>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/body.css">
+
+</head>
+<body>
+    <div class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                <span> KPHP Playground </span>
+            </div>
+            <div class="header__contents">
+                <div class="header__documentation">
+                    <a href="https://vkcom.github.io/kphp/"> Documentation </a>
+                </div>
+                <div class="header__github">
+                    <a href="https://github.com/VKCOM/kphp"> GitHub </a>
+                </div>
+                <div class="header__tg">
+                    <a href="https://t.me/kphp_chat"> Telegram chat </a>
+                </div>
+            </div>
+        </div>
+        <hr size="1px" width="100%" color="#B8B8B8" noshade>
+    </div>
+    <div class="header__vacuum"></div>
+    <div class="settings">
+        <div class="settings__examples">
+            <div class="settings__examples-text">Examples:</div>
+            <button class="settings__examples-select" id="settings__examples-select">
+                <span class="settings__examples-select-text" id="settings__examples-select-text">Hello KPHP!</span>
+                <img src="images/down-arrow.png">
+            </button>
+            <div class="settings__examples-select-content" id="settings__examples-select-content">
+                <div class="settings__examples-select-content-text" onclick="selectExamplesCode(this)">
+                    <span class="settings__examples-select-text_">Hello KPHP!</span>
+                </div>
+                <div class="settings__examples-select-content-text" onclick="selectExamplesCode(this)">
+                    <span class="settings__examples-select-text_">Example 1</span>
+                </div>
+                <div class="settings__examples-select-content-text" onclick="selectExamplesCode(this)">
+                    <span class="settings__examples-select-text_">Example 2</span>
+                </div>
+            </div>
+        </div>
+        <div class="settings__run">
+            <button class="settings__btn-run">
+                <img src="images/run-btn.png">
+                <span>Run</span>
+            </button>
+        </div>
+    </div>
+    <textarea id="editor"></textarea>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+<script src="http://codemirror.net/mode/php/../htmlmixed/htmlmixed.js"></script>
+<script src="http://codemirror.net/mode/php/../xml/xml.js"></script>
+<script src="http://codemirror.net/mode/php/../javascript/javascript.js"></script>
+<script src="http://codemirror.net/mode/php/../css/css.js"></script>
+<script src="http://codemirror.net/mode/php/../clike/clike.js"></script>
+<script src="http://codemirror.net/mode/php/php.js"></script>
+
+<script src="./js/editor.js"></script>
+
+</html>
