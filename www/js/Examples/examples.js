@@ -1,13 +1,9 @@
-window.addEventListener('click', function (e) {
-    if (document.getElementById("settings__examples-select").contains(e.target)) {
-        document.getElementById("settings__examples-select-content").style.display="inline-block";
-    } else {
-        document.getElementById("settings__examples-select-content").style.display="none";
-    }
-})
+import Example from '../Examples/Example.js'
 
-let examples = {
-    "Hello KPHP!" : "<?php\n" +
+export var examples = [
+    new Example(
+        "Hello KPHP!",
+        "<?php\n" +
         "// when launched, shows a form with <input> for entering a number\n" +
         "// when a number is submitted, prints this number squared and a clear button\n" +
         "\n" +
@@ -47,27 +43,24 @@ let examples = {
         "if (!$input->isNumberEntered())\n" +
         "  echo htmlHeader(), htmlFormWithInput();\n" +
         "else\n" +
-        "  echo htmlHeader(), htmlNumberSquared($input->getNumberEntered());",
-    "Example 1" : "<?php\n" +
-        "   echo 'Example 1';",
-    "Example 2" : "<?php\n" +
-        "   echo 'Example 2';",
-};
+        "  echo htmlHeader(), htmlNumberSquared($input->getNumberEntered());"
+    ),
+    new Example(
+        "Example 1",
+        "<?php\n" +
+        "   echo 'Example 1';"
+    ),
+    new Example(
+        "Example 2",
+        "<?php\n" +
+        "   echo 'Example 2';"
+    )];
 
-let exampleName = "Hello KPHP!";
-document.getElementById('editor').innerHTML = examples[exampleName];
+export let exampleName = "Hello KPHP!";
+export const findExampleName = (el) => {
+    return exampleName === el.name;
+}
 
-let editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
-    mode: "application/x-httpd-php",
-    matchBrackets: true,
-    lineNumbers: true,
-    theme: "friendship-bracelet"
-});
-editor.save();
-
-function selectExamplesCode(el) {
-    exampleName = el.childNodes[1].innerHTML;
-    document.getElementById("settings__examples-select-text").innerHTML = exampleName;
-    document.getElementById('editor').innerHTML = examples[exampleName];
-    editor.setValue(examples[exampleName]);
+export function setExampleName(newName) {
+    exampleName = newName;
 }

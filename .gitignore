@@ -34,3 +34,4 @@
 *im.webarchive
 *.DS_Store
 .idea/
+node_modules/
