@@ -12,11 +12,33 @@ window.addEventListener('click', function (e) {
     }
 })
 
-let elements = document.getElementsByClassName("settings__examples-select-content-text");
-for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('click', function () {
-        setExampleName(elements[i].childNodes[1].innerHTML);
+let examplesList = document.getElementsByClassName("settings__examples-select-content-text");
+for (let i = 0; i < examplesList.length; i++) {
+    let elementOfExamples = examplesList[i];
+    elementOfExamples.addEventListener('click', function () {
+        setExampleName(elementOfExamples.childNodes[1].innerHTML);
         document.getElementById("settings__examples-select-text").innerHTML = exampleName;
         editor.setCode(examples.find(findExampleName).code);
     })
 }
+
+let runBtn = document.getElementById("settings__btn-run");
+runBtn.addEventListener('click', async function () {
+    const url = "http://localhost:8001/server/index.php";
+    const code = editor.getCode();
+    const data = {
+        code: code
+    };
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+    };
+
+    let response = await fetch(url, options);
+    let result = await response.json();
+})
+
+

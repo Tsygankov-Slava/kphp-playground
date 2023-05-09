@@ -13,4 +13,8 @@ export default class Editor {
     setCode(code) {
         this.editor.setValue(code);
     }
+
+    getCode() {
+         return this.editor.getValue();
+    }
 }
