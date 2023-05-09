@@ -1,0 +1,11 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:VKCOM/kphp-polyfills.git"
+    }
+  ],
+  "require": {
+    "vkcom/kphp-polyfills": "^1.0.0"
+  }
+}

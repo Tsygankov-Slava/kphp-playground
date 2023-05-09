@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'af0ab0317c0ec85b2ab88c90b1deac51e0fc19a8',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'af0ab0317c0ec85b2ab88c90b1deac51e0fc19a8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'rybakit/msgpack' => array(
+            'pretty_version' => 'v0.7.2',
+            'version' => '0.7.2.0',
+            'reference' => 'f3ad27e3e7eba2204e022ec175a981e6ccb97548',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rybakit/msgpack',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'vkcom/kphp-polyfills' => array(
+            'pretty_version' => 'v1.0.29',
+            'version' => '1.0.29.0',
+            'reference' => '78f4cfb1d19426cc55f81355bee978667c781dd0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../vkcom/kphp-polyfills',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);
