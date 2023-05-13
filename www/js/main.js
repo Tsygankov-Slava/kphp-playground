@@ -39,6 +39,6 @@ runBtn.addEventListener('click', async function () {
 
     let response = await fetch(url, options);
     let result = await response.json();
+    console.log(result);
 })
-
 
