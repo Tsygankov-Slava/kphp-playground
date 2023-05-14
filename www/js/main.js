@@ -22,8 +22,15 @@ for (let i = 0; i < examplesList.length; i++) {
     })
 }
 
+let compilePanel = document.getElementById("compile_panel");
 let runBtn = document.getElementById("settings__btn-run");
 runBtn.addEventListener('click', async function () {
+    let console_ = document.getElementById("compile_panel__console");
+    console_.textContent = "Running code...";
+    console_.style.color = "#B8B8B8";
+
+    compilePanel.style.visibility = "visible";
+
     const url = "http://localhost:8001/server/index.php";
     const code = editor.getCode();
     const data = {
@@ -40,5 +47,44 @@ runBtn.addEventListener('click', async function () {
     let response = await fetch(url, options);
     let result = await response.json();
     console.log(result);
+
+    if (result["result_val_comp"]) {
+        console_.style.color = "red";
+    }
+
+    const output = result["output"];
+    let outputToConsole = ``;
+    for (let i = 0; i < output.length; i++) {
+        outputToConsole += output[i] + '<br>';
+    }
+    console_.innerHTML = outputToConsole;
 })
+
+let hideConsolePanelBtn = document.getElementById("compile_panel__header__btn-hide");
+hideConsolePanelBtn.addEventListener('click', function () {
+    compilePanel.style.visibility = "hidden"
+})
+
+
+let compilePanelHeader = document.getElementById("compile_panel__header");
+compilePanelHeader.ondragstart = function() {
+    return false;
+};
+compilePanelHeader.onmousedown = function (event) {
+    function moveAt(pageY) {
+        compilePanel.style.height = innerHeight - pageY + (compilePanelHeader.clientHeight / 2) + 'px';
+        console.log(pageY, innerHeight);
+    }
+    function onMouseMove(event) {
+        moveAt(event.clientY);
+    }
+
+    moveAt(event.clientY);
+
+    document.addEventListener('mousemove', onMouseMove);
+    compilePanelHeader.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        compilePanelHeader.onmouseup = null;
+    };
+}
 

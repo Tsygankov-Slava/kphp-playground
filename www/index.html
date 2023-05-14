@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/body.css">
+    <link rel="stylesheet" href="css/compile_panel.css">
 
 </head>
 <body>
@@ -65,6 +66,15 @@
         </div>
     </div>
     <textarea id="editor"></textarea>
+    <div class="compile_panel" id="compile_panel">
+        <div class="compile_panel__header" id="compile_panel__header">
+            <div class="compile_panel__header_run-text"> Run </div>
+            <div class="compile_panel__header__btn-hide" id="compile_panel__header__btn-hide">
+                <img class="compile_panel__header__img-hide" src="images/hide-compile_panel-btn.png">
+            </div>
+        </div>
+        <pre class="compile_panel__console" id="compile_panel__console"></pre>
+    </div>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>

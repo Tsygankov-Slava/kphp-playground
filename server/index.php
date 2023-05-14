@@ -45,7 +45,9 @@ if (isset($_POST)) {
     if (!empty($code)) {
         createFileWithCode($code);
         compile($output, $result_val_comp);
-        run($output, $result_val_exec);
+        if (!$result_val_comp) {
+            run($output, $result_val_exec);
+        }
     }
 
     $result = array(
