@@ -70,6 +70,10 @@ export default class CompilePanel {
             if (!mouseDown) return;
             const height = innerHeight - event.clientY + (this.#header.clientHeight / 2);
             this.#panel.style.height = height + 'px';
+
+            let editorScroll = document.getElementsByClassName("CodeMirror-scroll")[0];
+            const editorHeight = this.#panel.getBoundingClientRect().y - editorScroll.getBoundingClientRect().y;
+            editorScroll.style.height = editorHeight + 'px';
         });
 
         document.addEventListener('mouseup', () => {
