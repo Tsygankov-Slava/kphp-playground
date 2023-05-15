@@ -53,14 +53,7 @@ export var examples = [
     new Example(
         "Example 2",
         "<?php\n" +
-        "   echo 'Example 2';"
+        "   echo 'Exampl"
     )];
 
 export let exampleName = "Hello KPHP!";
-export const findExampleName = (el) => {
-    return exampleName === el.name;
-}
-
-export function setExampleName(newName) {
-    exampleName = newName;
-}
