@@ -7,6 +7,7 @@ export default class CompilePanel {
     #hideBtn = document.getElementById("compile_panel__header__btn-hide");
     #console = document.getElementById("compile_panel__console");
     #runBtn = document.getElementById("settings__btn-run");
+    #editorScroll = document.getElementsByClassName("CodeMirror-scroll")[0];
 
     constructor() {
         this.#hideBtn.addEventListener('click', this.#hidden.bind(this) );
@@ -18,7 +19,9 @@ export default class CompilePanel {
     }
 
     #hidden() {
-        this.#panel.style.visibility = "hidden"
+        this.#panel.style.visibility = "hidden";
+        this.#editorScroll.style.height = "100%";
+
     }
 
     #show() {
@@ -54,11 +57,17 @@ export default class CompilePanel {
         this.#setTextColor("#B8B8B8");
         this.#show();
 
+        this.#generateEditorHeight();
+
         let codeRunner = new CodeRunner;
         const resultCompile = await codeRunner.run(editor.getCode());
         this.#outputCompileTextToConsole(resultCompile);
     }
 
+    #generateEditorHeight() {
+        const editorHeight = this.#panel.getBoundingClientRect().y - this.#editorScroll.getBoundingClientRect().y;
+        this.#editorScroll.style.height = editorHeight + 'px';
+    }
     #trackMove() {
         let mouseDown = false;
 
@@ -71,9 +80,7 @@ export default class CompilePanel {
             const height = innerHeight - event.clientY + (this.#header.clientHeight / 2);
             this.#panel.style.height = height + 'px';
 
-            let editorScroll = document.getElementsByClassName("CodeMirror-scroll")[0];
-            const editorHeight = this.#panel.getBoundingClientRect().y - editorScroll.getBoundingClientRect().y;
-            editorScroll.style.height = editorHeight + 'px';
+            this.#generateEditorHeight();
         });
 
         document.addEventListener('mouseup', () => {
