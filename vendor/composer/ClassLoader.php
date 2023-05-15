@@ -28,7 +28,7 @@ namespace Composer\Autoload;
  *     $loader->setUseIncludePath(true);
  *
  * In this example, if you try to use a class in the Symfony\Component
- * namespace or one of its children (Symfony\Component\Console for instance),
+ * namespace or one of its children (Symfony\Component\CompilePanel for instance),
  * the autoloader will first look for the class under the component/
  * directory, and it will then fallback to the framework/ directory if not
  * found before giving up.

@@ -13,7 +13,8 @@ export default class CompilePanel {
         this.#runBtn.addEventListener('click', this.runCompile.bind(this));
 
         this.#header.ondragstart = function() { return false; };
-        this.#header.onmousedown = this.#trackMove.bind(this);
+        this.#trackMove();
+
     }
 
     #hidden() {
@@ -58,22 +59,22 @@ export default class CompilePanel {
         this.#outputCompileTextToConsole(resultCompile);
     }
 
-    #trackMove(event) {
-        let boundMoveAt = moveAt.bind(this);
-        boundMoveAt(event.clientY);
-        document.addEventListener('mousemove', onMouseMove);
-        function moveAt(clientY) {
-            this.#panel.style.height = innerHeight - clientY + (this.#header.clientHeight / 2) + 'px';
-        }
-        function onMouseMove(event) {
-            boundMoveAt(event.clientY);
-        }
+    #trackMove() {
+        let mouseDown = false;
 
-        this.#header.onmouseup = onMouseUp.bind(this);
-        function onMouseUp() {
-            document.removeEventListener('mousemove', onMouseMove);
-            this.#header.onmouseup = null;
-        }
+        this.#header.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!mouseDown) return;
+            const height = innerHeight - event.clientY + (this.#header.clientHeight / 2);
+            this.#panel.style.height = height + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            mouseDown = false;
+        })
     }
 }
 
