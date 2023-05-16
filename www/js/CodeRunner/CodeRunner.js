@@ -1,6 +1,7 @@
 export default class CodeRunner {
     #url = "http://localhost:8001/server/index.php";
     #options;
+    #result;
 
     async run(code) {
         const data = { code: code };
@@ -11,12 +12,15 @@ export default class CodeRunner {
             },
             body: JSON.stringify(data)
         };
-        return await this.#request();
+        await this.#request();
     }
 
     async #request() {
         const response = await fetch(this.#url, this.#options);
-        const result = await response.json();
-        return result;
+        this.#result = await response.json();
+    }
+
+    getResult() {
+        return this.#result;
     }
 }

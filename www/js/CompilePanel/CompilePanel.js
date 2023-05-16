@@ -8,20 +8,25 @@ export default class CompilePanel {
     #console = document.getElementById("compile_panel__console");
     #runBtn = document.getElementById("settings__btn-run");
     #editorScroll = document.getElementsByClassName("CodeMirror-scroll")[0];
+    #buildLogBtn = document.getElementById("compile_panel__header__build-log-btn");
+    #outputBtn = document.getElementById("compile_panel__header__output-btn");
+
+    #codeRunner = new CodeRunner;
 
     constructor() {
         this.#hideBtn.addEventListener('click', this.#hidden.bind(this) );
         this.#runBtn.addEventListener('click', this.runCompile.bind(this));
 
+        this.#buildLogBtn.addEventListener('click', this.#displayBuildLog.bind(this));
+        this.#outputBtn.addEventListener('click', this.#displayOutput.bind(this));
+
         this.#header.ondragstart = function() { return false; };
         this.#trackMove();
-
     }
 
     #hidden() {
         this.#panel.style.visibility = "hidden";
         this.#editorScroll.style.height = "100%";
-
     }
 
     #show() {
@@ -43,42 +48,54 @@ export default class CompilePanel {
         return compileTextForConsole;
     }
 
-    #outputCompileTextToConsole(resultCompile) {
+    #displayCompileTextToConsole() {
+        const resultCompile = this.#codeRunner.getResult();
         if (resultCompile["result_val_comp"]) {
-            this.#setTextColor("red");
+            this.#displayBuildLogToConsole();
         }
 
         let compileTextForConsole = this.#buildCompileTextForConsole(resultCompile["output"]);
         this.#setText(compileTextForConsole);
     }
 
+    #displayBuildLogToConsole() {
+        const resultCompile = this.#codeRunner.getResult();
+        if (resultCompile["result_val_comp"]) {
+            this.#setTextColor("red");
+        }
+
+        let buildLogForConsole = resultCompile["build_log"];
+        this.#setText(buildLogForConsole);
+    }
+
     async runCompile() {
+        this.#displayBuildLog(false);
         this.#setText("Running code...");
         this.#setTextColor("#B8B8B8");
         this.#show();
 
-        this.#generateEditorHeight();
+        await this.#codeRunner.run(editor.getCode());
+        this.#displayOutput();
 
-        let codeRunner = new CodeRunner;
-        const resultCompile = await codeRunner.run(editor.getCode());
-        this.#outputCompileTextToConsole(resultCompile);
+        this.#generateEditorHeight();
     }
 
     #generateEditorHeight() {
         const editorHeight = this.#panel.getBoundingClientRect().y - this.#editorScroll.getBoundingClientRect().y;
         this.#editorScroll.style.height = editorHeight + 'px';
     }
+
     #trackMove() {
         let mouseDown = false;
-
-        this.#header.addEventListener('mousedown', (event) => {
+        this.#header.addEventListener('mousedown', () => {
             mouseDown = true;
         });
 
         document.addEventListener('mousemove', (event) => {
             if (!mouseDown) return;
-            const height = innerHeight - event.clientY + (this.#header.clientHeight / 2);
-            this.#panel.style.height = height + 'px';
+            const consolePanelHeight = innerHeight - event.clientY + (this.#header.clientHeight / 2);
+            this.#panel.style.height = consolePanelHeight + 'px';
+            this.#console.style.height = consolePanelHeight - 60 + 'px';
 
             this.#generateEditorHeight();
         });
@@ -87,5 +104,24 @@ export default class CompilePanel {
             mouseDown = false;
         })
     }
-}
 
+    #displayBuildLog($callDisplayBuildLog = true) {
+        this.#outputBtn.style.borderBottom = "none";
+        this.#outputBtn.style.paddingTop = "0px";
+        this.#buildLogBtn.style.paddingTop = "2px";
+        this.#buildLogBtn.style.borderBottom = "solid 2px #0069c2";
+
+        if ($callDisplayBuildLog) {
+            this.#displayBuildLogToConsole();
+        }
+    }
+
+    #displayOutput() {
+        this.#buildLogBtn.style.borderBottom = "none";
+        this.#buildLogBtn.style.paddingTop = "0px";
+        this.#outputBtn.style.paddingTop = "2px";
+        this.#outputBtn.style.borderBottom = "solid 2px #0069c2";
+
+        this.#displayCompileTextToConsole();
+    }
+}
