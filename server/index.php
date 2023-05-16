@@ -17,24 +17,34 @@ if (isset($_POST)) {
     }
 
     /**
-     * @param ?string[] $output
+     * @param ?string[] $output_comp
      */
-    function compile(&$output, ?int &$result_val) {
-        $command = "/Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php";
-        exec($command, $output, $result_val);
+    function compile(&$output_comp, ?int &$result_val) {
+        $command = "time /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php";
+
+        $proc = proc_open($command, [2 => ['pipe','w']], $pipes);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        proc_close($proc);
+
+        $output_comp = $stderr;
     }
 
     /**
-     * @param ?string[] $output
+     * @param ?string[] $output_run
      */
-    function run(&$output, ?int &$result_val) {
-        exec("./kphp_out/cli", $output, $result_val);
+    function run(&$output_run, ?int &$result_val) {
+        $command = "./kphp_out/cli";
+        exec($command, $output_run, $result_val);
     }
 
     $code = getCode();
 
-    /* @var ?string[] $output */
-    $output = [];
+    /* @var ?string[] $output_comp */
+    $output_comp = [];
+
+    /* @var ?string[] $output_run */
+    $output_run = [];
 
     /* @var ?int $result_val_comp */
     $result_val_comp = null;
@@ -44,14 +54,15 @@ if (isset($_POST)) {
 
     if (!empty($code)) {
         createFileWithCode($code);
-        compile($output, $result_val_comp);
+        compile($output_comp, $result_val_comp);
         if (!$result_val_comp) {
-            run($output, $result_val_exec);
+            run($output_run, $result_val_exec);
         }
     }
 
     $result = array(
-        "output" => $output,
+        "build_log" => $output_comp,
+        "output" => $output_run,
         "result_val_comp" => $result_val_comp,
         "result_val_exec" => $result_val_exec
     );
