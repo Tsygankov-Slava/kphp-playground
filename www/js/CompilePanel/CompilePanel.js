@@ -50,11 +50,13 @@ export default class CompilePanel {
 
     #displayCompileTextToConsole() {
         const resultCompile = this.#codeRunner.getResult();
+        let text = resultCompile["output"];
         if (resultCompile["result_val_comp"]) {
             this.#displayBuildLogToConsole();
+            text = "";
         }
 
-        let compileTextForConsole = this.#buildCompileTextForConsole(resultCompile["output"]);
+        let compileTextForConsole = this.#buildCompileTextForConsole(text);
         this.#setText(compileTextForConsole);
     }
 
@@ -64,7 +66,7 @@ export default class CompilePanel {
             this.#setTextColor("red");
         }
 
-        let buildLogForConsole = resultCompile["build_log"];
+        let buildLogForConsole = resultCompile["build_log_stderr"] + resultCompile["build_log_stdout"];
         this.#setText(buildLogForConsole);
     }
 
@@ -75,7 +77,12 @@ export default class CompilePanel {
         this.#show();
 
         await this.#codeRunner.run(editor.getCode());
-        this.#displayOutput();
+        console.log(this.#codeRunner.getResult());
+        if (!this.#codeRunner.getResult()['result_val_comp']) {
+            this.#displayOutput();
+        } else {
+            this.#displayBuildLog();
+        }
 
         this.#generateEditorHeight();
     }

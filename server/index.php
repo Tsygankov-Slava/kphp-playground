@@ -17,17 +17,22 @@ if (isset($_POST)) {
     }
 
     /**
-     * @param ?string[] $output_comp
+     * @param ?string[] $output_comp_stdout
+     * * @param ?string[] $output_comp_stderr
      */
-    function compile(&$output_comp, ?int &$result_val) {
+    function compile(&$output_comp_stdout, &$output_comp_stderr, ?int &$result_val) {
         $command = "time /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php";
-
-        $proc = proc_open($command, [2 => ['pipe','w']], $pipes);
+        $proc = proc_open($command, [1 => ['pipe', 'w'], 2 => ['pipe','w']], $pipes);
+        $stdout = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
         fclose($pipes[2]);
         proc_close($proc);
 
-        $output_comp = $stderr;
+        $output_comp_stdout = $stdout;
+        $output_comp_stderr = $stderr;
+
+        $result_val = empty($output_comp_stdout) ? 0 : 1;
     }
 
     /**
@@ -40,8 +45,11 @@ if (isset($_POST)) {
 
     $code = getCode();
 
-    /* @var ?string[] $output_comp */
-    $output_comp = [];
+    /* @var ?string[] $output_comp_stdout */
+    $output_comp_stdout = [];
+
+    /* @var ?string[] $output_comp_stderr */
+    $output_comp_stderr = [];
 
     /* @var ?string[] $output_run */
     $output_run = [];
@@ -54,14 +62,15 @@ if (isset($_POST)) {
 
     if (!empty($code)) {
         createFileWithCode($code);
-        compile($output_comp, $result_val_comp);
+        compile($output_comp_stdout, $output_comp_stderr, $result_val_comp);
         if (!$result_val_comp) {
             run($output_run, $result_val_exec);
         }
     }
 
     $result = array(
-        "build_log" => $output_comp,
+        "build_log_stdout" => $output_comp_stdout,
+        "build_log_stderr" => $output_comp_stderr,
         "output" => $output_run,
         "result_val_comp" => $result_val_comp,
         "result_val_exec" => $result_val_exec
