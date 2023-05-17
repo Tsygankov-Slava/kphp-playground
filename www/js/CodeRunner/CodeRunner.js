@@ -3,8 +3,8 @@ export default class CodeRunner {
     #options;
     #result;
 
-    async run(code) {
-        const data = { code: code };
+    async run(code, runArguments) {
+        const data = { code: code, runArguments: runArguments };
         this.#options = {
             method: 'POST',
             headers: {

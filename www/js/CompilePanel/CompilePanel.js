@@ -10,6 +10,7 @@ export default class CompilePanel {
     #editorScroll = document.getElementsByClassName("CodeMirror-scroll")[0];
     #buildLogBtn = document.getElementById("compile_panel__header__build-log-btn");
     #outputBtn = document.getElementById("compile_panel__header__output-btn");
+    #runArgumentsInput = document.getElementById("settings__run-arguments__input");
 
     #codeRunner = new CodeRunner;
 
@@ -71,12 +72,14 @@ export default class CompilePanel {
     }
 
     async runCompile() {
+        const runArguments = this.#runArgumentsInput.value;
+
         this.#displayBuildLog(false);
         this.#setText("Running code...");
         this.#setTextColor("#B8B8B8");
         this.#show();
 
-        await this.#codeRunner.run(editor.getCode());
+        await this.#codeRunner.run(editor.getCode(), runArguments);
         console.log(this.#codeRunner.getResult());
         if (!this.#codeRunner.getResult()['result_val_comp']) {
             this.#displayOutput();

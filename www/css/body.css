@@ -21,7 +21,6 @@ body {
     height: 55px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     align-items: center;
     padding-top: 5px;
 }
@@ -31,8 +30,9 @@ body {
     flex-direction: row;
     justify-content: right;
     align-items: center;
-    width: 50%;
     height: 100%;
+    position: absolute;
+    right: 30px;
 }
 
 .settings__btn-run {
@@ -65,7 +65,7 @@ body {
 
 .settings__examples {
     height: 100%;
-    width: 50%;
+    width: 18%;
     margin-left: 3%;
 }
 
@@ -81,7 +81,7 @@ body {
     align-items: center;
     margin-top: 2px;
     height: 60%;
-    width: 40%;
+    width: 100%;
     border: none;
     border-radius: 4px;
     background-color: #2a2a2d;
@@ -103,10 +103,8 @@ body {
 }
 .settings__examples-select-content {
     display: none;
-    width: 40%;
+    width: 100%;
     background-color: #2a2a2d;
-    #padding-top: 2%;
-    #padding-bottom: 1%;
 }
 
 
@@ -119,4 +117,37 @@ body {
 
 .settings__examples-select-content-text:hover {
     background-color: #36363a;
+}
+
+.settings__run-arguments {
+    width: 15%;
+    height: 100%;
+    margin-left: 20px;
+}
+
+.settings__run-arguments__input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    height: 56%;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: #2a2a2d;
+    color: white;
+    font-size: 90%;
+    outline: none;
+    padding-left: 5px;
+    color: #b8b8b8;
+}
+
+.settings__run-arguments__input:focus {
+    border: 1px solid white;
+}
+
+.settings__run-arguments__text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #b8b8b8;
 }

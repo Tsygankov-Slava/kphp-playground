@@ -3,11 +3,20 @@
 require_once '../vendor/autoload.php';
 
 if (isset($_POST)) {
-    function getCode(): string {
-        $json = file_get_contents('php://input');
-        $obj = json_decode($json);
-
+    $json = file_get_contents('php://input');
+    $obj = json_decode($json);
+    /**
+     * @param mixed $obj
+     */
+    function getCode(&$obj): string {
         return !empty($obj->code) ? $obj->code : "";
+    }
+
+    /**
+     * @param mixed $obj
+     */
+    function getRunArguments(&$obj): string {
+        return !empty($obj->runArguments) ? $obj->runArguments : "";
     }
 
     function createFileWithCode(string $code) {
@@ -38,12 +47,13 @@ if (isset($_POST)) {
     /**
      * @param ?string[] $output_run
      */
-    function run(&$output_run, ?int &$result_val) {
-        $command = "./kphp_out/cli";
+    function run(&$output_run, ?int &$result_val, string $runArguments) {
+        $command = "./kphp_out/cli " . $runArguments;
         exec($command, $output_run, $result_val);
     }
 
-    $code = getCode();
+    $code = getCode($obj);
+    $runArguments = getRunArguments($obj);
 
     /* @var ?string[] $output_comp_stdout */
     $output_comp_stdout = [];
@@ -64,7 +74,7 @@ if (isset($_POST)) {
         createFileWithCode($code);
         compile($output_comp_stdout, $output_comp_stderr, $result_val_comp);
         if (!$result_val_comp) {
-            run($output_run, $result_val_exec);
+            run($output_run, $result_val_exec, $runArguments);
         }
     }
 
