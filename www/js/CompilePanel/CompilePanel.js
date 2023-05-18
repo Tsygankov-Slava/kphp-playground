@@ -21,8 +21,12 @@ export default class CompilePanel {
         this.#buildLogBtn.addEventListener('click', this.#displayBuildLog.bind(this));
         this.#outputBtn.addEventListener('click', this.#displayOutput.bind(this));
 
+        this.#runArgumentsInput.addEventListener('input', this.#saveValueToLocalStorage.bind(this));
+
         this.#header.ondragstart = function() { return false; };
         this.#trackMove();
+
+        this.#runArgumentsInput.value = localStorage['runArguments'];
     }
 
     #hidden() {
@@ -133,5 +137,9 @@ export default class CompilePanel {
         this.#outputBtn.style.borderBottom = "solid 2px #0069c2";
 
         this.#displayCompileTextToConsole();
+    }
+
+    #saveValueToLocalStorage() {
+        localStorage.setItem('runArguments', this.#runArgumentsInput.value)
     }
 }

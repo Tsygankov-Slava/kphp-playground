@@ -23,6 +23,10 @@ export default class ExamplesPanel {
                 this.#changeExample(exampleName);
             });
         }
+
+        if (localStorage['exampleName']) {
+            this.#examplesSelectBtnText.innerHTML = localStorage['exampleName'];
+        }
     }
 
     #changeExample(exampleName) {

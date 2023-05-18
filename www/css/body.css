@@ -120,12 +120,14 @@ body {
 }
 
 .settings__run-arguments {
+    font-family: 'JetBrains Mono', monospace;
     width: 15%;
     height: 100%;
     margin-left: 20px;
 }
 
 .settings__run-arguments__input {
+    font-family: 'JetBrains Mono', monospace;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -147,7 +149,6 @@ body {
 }
 
 .settings__run-arguments__text {
-    font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     color: #b8b8b8;
 }

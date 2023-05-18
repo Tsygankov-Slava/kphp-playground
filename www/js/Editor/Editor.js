@@ -1,3 +1,5 @@
+import {examplesPanel} from "../main.js";
+
 export default class Editor {
     #editorScroll;
 
@@ -14,6 +16,9 @@ export default class Editor {
         this.#editorScroll = document.getElementsByClassName("CodeMirror-scroll")[0]
         const editorScrollHeight = document.documentElement.clientHeight - this.#editorScroll.getBoundingClientRect().y;
         this.#editorScroll.style.height = editorScrollHeight + "px";
+
+        document.addEventListener('keydown', this.#saveCodeToLocalStorage.bind(this));
+
     }
 
     setCode(code) {
@@ -22,5 +27,10 @@ export default class Editor {
 
     getCode() {
          return this.editor.getValue();
+    }
+
+    #saveCodeToLocalStorage() {
+        localStorage.setItem('code', this.getCode());
+        localStorage.setItem("exampleName", examplesPanel.getExampleName());
     }
 }
