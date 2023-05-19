@@ -1,4 +1,4 @@
-import {exampleName, examples} from "./examples.js";
+import {examples} from "./examples.js";
 import {editor, examplesPanel} from "../main.js";
 
 export default class ExamplesPanel {
@@ -7,7 +7,7 @@ export default class ExamplesPanel {
     #examplesList = document.getElementsByClassName("settings__examples-select-content-text");
     #examplesSelectBtnText = document.getElementById("settings__examples-select-text");
 
-    #exampleName = exampleName;
+    #exampleName = "Hello, KPHP!";
     #examples = examples;
 
     findExampleName = this.#findExampleName.bind(this);
@@ -25,7 +25,8 @@ export default class ExamplesPanel {
         }
 
         if (localStorage['exampleName']) {
-            this.#examplesSelectBtnText.innerHTML = localStorage['exampleName'];
+            this.#exampleName = localStorage['exampleName'];
+            this.#examplesSelectBtnText.innerHTML = this.#exampleName;
         }
     }
 

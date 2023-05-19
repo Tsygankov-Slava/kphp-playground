@@ -1,7 +1,9 @@
-import {examplesPanel} from "../main.js";
+import {editor, examplesPanel} from "../main.js";
 
 export default class Editor {
     #editorScroll;
+
+    #refreshBtn = document.getElementById("settings__btn-refresh");
 
     constructor(mode, matchBrackets, lineNumbers, theme) {
         const config = {
@@ -19,6 +21,7 @@ export default class Editor {
 
         document.addEventListener('keydown', this.#saveCodeToLocalStorage.bind(this));
 
+        this.#refreshBtn.addEventListener('click', this.#refreshCode);
     }
 
     setCode(code) {
@@ -33,5 +36,13 @@ export default class Editor {
         const codeName = examplesPanel.getExampleName() + '_code';
         localStorage.setItem(codeName, this.getCode());
         localStorage.setItem("exampleName", examplesPanel.getExampleName());
+    }
+
+    #refreshCode() {
+        const codeName = examplesPanel.getExampleName() + '_code';
+        localStorage.removeItem(codeName);
+        localStorage.setItem("exampleName", examplesPanel.getExampleName());
+        editor.setCode(examplesPanel.getExamples().find(examplesPanel.findExampleName).code);
+        //examplesPanel.setExampleName(examplesPanel.getExampleName());
     }
 }

@@ -230,5 +230,3 @@ export var examples = [
         "$array = json_decode($json);\n" +
         "print_r($array);\n"
     )];
-
-export let exampleName = "Hello, KPHP!";

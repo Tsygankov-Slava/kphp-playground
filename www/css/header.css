@@ -25,7 +25,7 @@
 }
 
 .header__logo span {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'JetBrains Mono';
     color: white;
     font-size: 130%;
 }
@@ -43,7 +43,7 @@
 }
 
 .header__contents a {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'JetBrains Mono';
     color: #B8B8B8;
     text-decoration: none;
 }
