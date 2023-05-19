@@ -1,5 +1,5 @@
 import {exampleName, examples} from "./examples.js";
-import {editor} from "../main.js";
+import {editor, examplesPanel} from "../main.js";
 
 export default class ExamplesPanel {
     #panelSelectContent = document.getElementById("settings__examples-select-content");
@@ -32,7 +32,12 @@ export default class ExamplesPanel {
     #changeExample(exampleName) {
         this.setExampleName(exampleName);
         this.#examplesSelectBtnText.innerHTML = this.getExampleName();
-        editor.setCode(this.getExamples().find(this.findExampleName).code);
+        const codeName = examplesPanel.getExampleName() + '_code';
+        let code = this.getExamples().find(this.findExampleName).code;
+        if (localStorage[codeName]) {
+            code = localStorage[codeName];
+        }
+        editor.setCode(code);
     }
 
     getExampleName() {

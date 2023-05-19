@@ -26,7 +26,9 @@ export default class CompilePanel {
         this.#header.ondragstart = function() { return false; };
         this.#trackMove();
 
-        this.#runArgumentsInput.value = localStorage['runArguments'];
+        if (localStorage['runArguments']) {
+            this.#runArgumentsInput.value = localStorage['runArguments'];
+        }
     }
 
     #hidden() {

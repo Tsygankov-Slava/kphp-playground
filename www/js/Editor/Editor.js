@@ -30,7 +30,8 @@ export default class Editor {
     }
 
     #saveCodeToLocalStorage() {
-        localStorage.setItem('code', this.getCode());
+        const codeName = examplesPanel.getExampleName() + '_code';
+        localStorage.setItem(codeName, this.getCode());
         localStorage.setItem("exampleName", examplesPanel.getExampleName());
     }
 }

@@ -6,8 +6,9 @@ export let editor = new Editor("application/x-httpd-php", true, true, "friendshi
 export let examplesPanel = new ExamplesPanel();
 new CompilePanel();
 
-if (localStorage['code']) {
-    editor.setCode(localStorage['code']);
+const code = localStorage[localStorage['exampleName'] + '_code'];
+if (code) {
+    editor.setCode(code);
     examplesPanel.setExampleName(localStorage['exampleName']);
 } else {
     editor.setCode(examplesPanel.getExamples().find(examplesPanel.findExampleName).code);
