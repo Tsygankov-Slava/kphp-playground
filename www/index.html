@@ -9,99 +9,231 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Fira+Code:wght@300&family=Inconsolata:wght@200&family=Source+Code+Pro:wght@200&family=Space+Mono&family=Ubuntu+Mono&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css"/>
+
     <link rel="stylesheet" href="js/codemirror/themes/friendship-bracelet.css"/>
+    <link rel="stylesheet" href="js/codemirror/themes/darkpastel.css"/>
+    <link rel="stylesheet" href="js/codemirror/themes/monokai.css"/>
+    <link rel="stylesheet" href="js/codemirror/themes/nightlion.css"/>
+    <link rel="stylesheet" href="js/codemirror/themes/amy.css"/>
+    <link rel="stylesheet" href="js/codemirror/themes/oceanic.css"/>
+    <link rel="stylesheet" href="js/codemirror/themes/idle.css"/>
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/body.css">
     <link rel="stylesheet" href="css/compile_panel.css">
+    <link rel="stylesheet" href="css/settings_panel.css">
 
 </head>
 <body>
-    <div class="header">
-        <div class="header__inner">
-            <div class="header__logo">
-                <span> KPHP Playground </span>
+    <div class="main" id="main">
+        <div class="header">
+            <div class="header__inner">
+                <div class="header__logo">
+                    <span> KPHP Playground </span>
+                </div>
+                <div class="header__contents">
+                    <div class="header__documentation">
+                        <a href="https://vkcom.github.io/kphp/"> Documentation </a>
+                    </div>
+                    <div class="header__github">
+                        <a href="https://github.com/VKCOM/kphp"> GitHub </a>
+                    </div>
+                    <div class="header__tg">
+                        <a href="https://t.me/kphp_chat"> Telegram chat </a>
+                    </div>
+                </div>
             </div>
-            <div class="header__contents">
-                <div class="header__documentation">
-                    <a href="https://vkcom.github.io/kphp/"> Documentation </a>
+            <hr size="1px" width="100%" color="#B8B8B8" noshade>
+        </div>
+        <div class="header__vacuum"></div>
+        <div class="settings">
+            <div class ="settings__refresh">
+                <div class="settings__refresh-text"> Refresh </div>
+                <button class="settings__btn-refresh" id="settings__btn-refresh">
+                    <img src="images/refresh.png">
+                </button>
+            </div>
+            <div class="settings__examples">
+                <div class="settings__examples-text"> Examples: </div>
+                <button class="settings__examples-select" id="settings__examples-select">
+                    <span class="settings__examples-select-text" id="settings__examples-select-text"> Hello, KPHP! </span>
+                    <img src="images/down-arrow.png">
+                </button>
+                <div class="settings__examples-select-content" id="settings__examples-select-content">
+                    <div class="settings__examples-select-content-text">
+                        <span class="settings__examples-select-text_">Hello, KPHP!</span>
+                    </div>
+                    <div class="settings__examples-select-content-text">
+                        <span class="settings__examples-select-text_">Fibonacci</span>
+                    </div>
+                    <div class="settings__examples-select-content-text">
+                        <span class="settings__examples-select-text_">Classes and Objects</span>
+                    </div>
+                    <div class="settings__examples-select-content-text">
+                        <span class="settings__examples-select-text_">Generic functions</span>
+                    </div>
+                    <div class="settings__examples-select-content-text">
+                        <span class="settings__examples-select-text_">Generic classes</span>
+                    </div>
+                    <div class="settings__examples-select-content-text">
+                        <span class="settings__examples-select-text_">Coroutines (forks)</span>
+                    </div>
+                    <div class="settings__examples-select-content-text">
+                        <span class="settings__examples-select-text_">JSON Encoding/Decoding</span>
+                    </div>
                 </div>
-                <div class="header__github">
-                    <a href="https://github.com/VKCOM/kphp"> GitHub </a>
-                </div>
-                <div class="header__tg">
-                    <a href="https://t.me/kphp_chat"> Telegram chat </a>
-                </div>
+            </div>
+            <div class="settings__run-arguments">
+                <div class="settings__run-arguments__text"> Run arguments: </div>
+                <input class="settings__run-arguments__input" id="settings__run-arguments__input" type="text">
+            </div>
+            <div class="settings__run">
+                <button class="settings__btn-run" id="settings__btn-run">
+                    <img src="images/run-btn.png">
+                    <span> Run </span>
+                </button>
+            </div>
+            <div class="settings__settings">
+                <button class="settings__btn-settings" id="settings__btn-settings">
+                    <img src="images/settings-btn.png">
+                </button>
             </div>
         </div>
-        <hr size="1px" width="100%" color="#B8B8B8" noshade>
+        <textarea id="editor"></textarea>
+        <div class="compile_panel" id="compile_panel">
+            <div class="compile_panel__header" id="compile_panel__header">
+                <div class="compile_panel__header__run-text"> Run </div>
+                <div class="compile_panel__header__build-log-btn" id="compile_panel__header__build-log-btn">
+                    <span class="compile_panel__header__build-log-btn__text"> Build log </span>
+                </div>
+                <div class="compile_panel__header__output-btn" id="compile_panel__header__output-btn">
+                    <span class="compile_panel__header__output-btn__text"> Output </span>
+                </div>
+                <div class="compile_panel__header__btn-hide" id="compile_panel__header__btn-hide">
+                    <img class="compile_panel__header__img-hide" src="images/hide-compile_panel-btn.png">
+                </div>
+            </div>
+            <pre class="compile_panel__console" id="compile_panel__console"></pre>
+        </div>
     </div>
-    <div class="header__vacuum"></div>
-    <div class="settings">
-        <div class ="settings__refresh">
-            <div class="settings__refresh-text">Refresh</div>
-            <button class="settings__btn-refresh" id="settings__btn-refresh">
-                <img src="images/refresh.png">
-            </button>
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-panel__header">
+            <div class="settings-panel__name"> Settings </div>
+            <div class="settings-panel__close">
+                <button class="settings-panel__close-btn" id="settings-panel__close-btn">
+                    <img src="images/close.png">
+                </button>
+            </div>
         </div>
-        <div class="settings__examples">
-            <div class="settings__examples-text">Examples:</div>
-            <button class="settings__examples-select" id="settings__examples-select">
-                <span class="settings__examples-select-text" id="settings__examples-select-text">Hello, KPHP!</span>
-                <img src="images/down-arrow.png">
-            </button>
-            <div class="settings__examples-select-content" id="settings__examples-select-content">
-                <div class="settings__examples-select-content-text">
-                    <span class="settings__examples-select-text_">Hello, KPHP!</span>
+        <hr style="width: 100%; box-sizing: border-box; font-size: 0px; background: #B8B8B8; border: none; height: 1px;" />
+        <div class="settings-panel__main">
+            <div class="settings-panel__main__font">
+                <div class="settings-panel__main__font-header">
+                    <div class="settings-panel__main__font__text">
+                        Font
+                    </div>
+                    <div class="settings-panel__main__font__text-line">
+                        <hr style="width: 95%; box-sizing: border-box; background: #635e5e; border: none; height: 2px;"/>
+                    </div>
                 </div>
-                <div class="settings__examples-select-content-text">
-                    <span class="settings__examples-select-text_">Fibonacci</span>
+                <div class="settings-panel__main__font-main">
+                    <div class="settings-panel__main__font-main__font">
+                        <div class="settings-panel__main__settings-name"> Font: </div>
+                        <div class="settings-panel__main__font-main__font-select">
+                            <button class="settings-panel__main__font-main__font-select-btn" id="settings-panel__main__font-main__font-select-btn">
+                                <span class="settings-panel__main__font-main__font-select-btn-text" id="settings-panel__main__font-main__font-select-btn-text"></span>
+                                <img src="images/down-arrow.png">
+                            </button>
+                            <div class="settings-panel__main__font-main-select-content" id="settings-panel__main__font-main-select-content">
+                                <div class="settings-panel__main__font-main-select-content-text">
+                                    <span class="settings-panel__main__font-main-select-content-text_">JetBrains Mono</span>
+                                </div>
+                                <div class="settings-panel__main__font-main-select-content-text">
+                                    <span class="settings-panel__main__font-main-select-content-text_">Source Code Pro</span>
+                                </div>
+                                <div class="settings-panel__main__font-main-select-content-text">
+                                    <span class="settings-panel__main__font-main-select-content-text_">Space Mono</span>
+                                </div>
+                                <div class="settings-panel__main__font-main-select-content-text">
+                                    <span class="settings-panel__main__font-main-select-content-text_">Anonymous Pro</span>
+                                </div>
+                                <div class="settings-panel__main__font-main-select-content-text">
+                                    <span class="settings-panel__main__font-main-select-content-text_">Fira Code</span>
+                                </div>
+                                <div class="settings-panel__main__font-main-select-content-text">
+                                    <span class="settings-panel__main__font-main-select-content-text_">Ubuntu Mono</span>
+                                </div>
+                                <div class="settings-panel__main__font-main-select-content-text">
+                                    <span class="settings-panel__main__font-main-select-content-text_">Inconsolata</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-panel__main__font-main__size">
+                        <div class="settings-panel__main__settings-name"> Size: </div>
+                        <input class="settings-panel__main__font-main__size-input" id="settings-panel__main__font-main__size-input">
+                    </div>
+                    <div class="settings-panel__main__font-main__line-height">
+                        <div class="settings-panel__main__settings-name"> Line height: </div>
+                        <input class="settings-panel__main__font-main__line-height-input" id="settings-panel__main__font-main__line-height-input">
+                    </div>
                 </div>
-                <div class="settings__examples-select-content-text">
-                    <span class="settings__examples-select-text_">Classes and Objects</span>
+            </div>
+            <div class="settings-panel__main__editor">
+                <div class="settings-panel__main__editor-header">
+                    <div class="settings-panel__main__editor__text">
+                        Editor
+                    </div>
+                    <div class="settings-panel__main__editor__text-line">
+                        <hr style="width: 95%; box-sizing: border-box; background: #635e5e; border: none; height: 2px;"/>
+                    </div>
                 </div>
-                <div class="settings__examples-select-content-text">
-                    <span class="settings__examples-select-text_">Generic functions</span>
-                </div>
-                <div class="settings__examples-select-content-text">
-                    <span class="settings__examples-select-text_">Generic classes</span>
-                </div>
-                <div class="settings__examples-select-content-text">
-                    <span class="settings__examples-select-text_">Coroutines (forks)</span>
-                </div>
-                <div class="settings__examples-select-content-text">
-                    <span class="settings__examples-select-text_">JSON Encoding/Decoding</span>
+                <div class="settings-panel__main__editor-main">
+                    <div class="settings-panel__main__editor-main__theme">
+                        <div class="settings-panel__main__settings-name"> Theme: </div>
+                        <div class="settings-panel__main__editor-main__theme-select">
+                            <button class="settings-panel__main__editor-main__theme-select-btn" id="settings-panel__main__editor-main__theme-select-btn">
+                                <span class="settings-panel__main__editor-main__theme-select-btn-text" id="settings-panel__main__editor-main__theme-select-btn-text"></span>
+                                <img src="images/down-arrow.png">
+                            </button>
+                            <div class="settings-panel__main__editor-main__theme-select-content" id="settings-panel__main__editor-main__theme-select-content">
+                                <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">friendship-bracelet</span>
+                                </div>
+                                <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">darkpastel</span>
+                                </div>
+                                <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">monokai</span>
+                                </div>
+                                <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">nightlion</span>
+                                </div>
+                                <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">amy</span>
+                                </div>
+                                <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">oceanic</span>
+                                </div>
+                                <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">idle</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-panel__main__editor-main__line-numbers">
+                        <div class="settings-panel__main__settings-name"> Line numbers: </div>
+                        <div class="settings-panel__main__editor-main__line-numbers__checkbox">
+                            <input type="checkbox" id="settings-panel__main__editor-main__line-numbers__checkbox" name="settings-panel__main__editor-main__line-numbers__checkbox">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="settings__run-arguments">
-            <div class="settings__run-arguments__text">Run arguments:</div>
-            <input class="settings__run-arguments__input" id="settings__run-arguments__input" type="text">
-        </div>
-        <div class="settings__run">
-            <button class="settings__btn-run" id="settings__btn-run">
-                <img src="images/run-btn.png">
-                <span>Run</span>
-            </button>
-        </div>
-    </div>
-    <textarea id="editor"></textarea>
-    <div class="compile_panel" id="compile_panel">
-        <div class="compile_panel__header" id="compile_panel__header">
-            <div class="compile_panel__header__run-text"> Run </div>
-            <div class="compile_panel__header__build-log-btn" id="compile_panel__header__build-log-btn">
-                <span class="compile_panel__header__build-log-btn__text">Build log</span>
-            </div>
-            <div class="compile_panel__header__output-btn" id="compile_panel__header__output-btn">
-                <span class="compile_panel__header__output-btn__text">Output</span>
-            </div>
-            <div class="compile_panel__header__btn-hide" id="compile_panel__header__btn-hide">
-                <img class="compile_panel__header__img-hide" src="images/hide-compile_panel-btn.png">
-            </div>
-        </div>
-        <pre class="compile_panel__console" id="compile_panel__console"></pre>
     </div>
 </body>
 

@@ -1,10 +1,12 @@
 import Editor from "./Editor/Editor.js";
 import ExamplesPanel from "./Examples/ExamplesPanel.js";
 import CompilePanel from "./CompilePanel/CompilePanel.js";
+import Settings from "./Settings/Settings.js"
 
-export let editor = new Editor("application/x-httpd-php", true, true, "friendship-bracelet");
+export var editor = new Editor("application/x-httpd-php", true, true, "friendship-bracelet");
 export let examplesPanel = new ExamplesPanel();
 new CompilePanel();
+new Settings();
 
 const code = localStorage[localStorage['exampleName'] + '_code'];
 if (code) {

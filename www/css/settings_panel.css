@@ -1,0 +1,323 @@
+.settings-panel {
+    z-index: 100;
+    position: absolute;
+    display: none;
+    background-color: #1e1f22;
+    width: 50%;
+    top: 35%;
+    left: 25%;
+    border: solid 1px black;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.settings-panel__header {
+    height: 8%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 10px 10px 10px;
+}
+
+.settings-panel__close {
+    margin-right: 2px;
+}
+
+.settings-panel__close-btn {
+    background-color: #1e1f22;
+    border: none;
+    border-radius: 2px;
+
+    display: flex;
+}
+
+.settings-panel__close-btn:hover {
+    background-color: #36363a;
+}
+
+.settings-panel__close-btn img {
+    width: 14px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.settings-panel__name {
+    font-family: 'Open Sans', sans-serif;
+    color: #B8B8B8;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.settings-panel__main {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-panel__main__font {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.settings-panel__main__font-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.settings-panel__main__font__text {
+    font-family: 'Open Sans', sans-serif;
+    color: #B8B8B8;
+    font-size: 18px;
+}
+
+.settings-panel__main__font__text-line {
+    width: 100%;
+}
+
+.settings-panel__main__font-main {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    width: 100%;
+
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin-top: 10px;
+}
+
+
+.settings-panel__main__font-main__size {
+    width: 14%;
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+.settings-panel__main__font-main__size-input {
+    margin-left: 10px;
+    width: 30px;
+    height: 100%;
+    background-color: #2a2a2d;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    outline: none;
+    text-align: center;
+}
+
+.settings-panel__main__font-main__size-input:focus {
+    border: 1px solid white;
+}
+
+.settings-panel__main__font-main__line-height {
+    width: 20%;
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    margin-top: 5px;
+}
+
+.settings-panel__main__font-main__line-height-input {
+    margin-left: 10px;
+    width: 30px;
+    height: 100%;
+    background-color: #2a2a2d;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    outline: none;
+    text-align: center;
+}
+
+.settings-panel__main__font-main__line-height-input:focus {
+    border: 1px solid white;
+}
+
+.settings-panel__main__font-main__font {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    font-size: 14px;
+}
+
+.settings-panel__main__font-main__font-select-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2a2a2d;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 5px 0 5px 8px;
+}
+
+.settings-panel__main__font-main__font-select-btn:hover {
+    background-color: #36363a;
+}
+
+.settings-panel__main__font-main__font-select-btn img {
+    width: 13px;
+    margin-right: 8px;
+}
+
+.settings-panel__main__font-main__font-select-btn-text {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+.settings-panel__main__editor {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.settings-panel__main__editor-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.settings-panel__main__editor-main {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    width: 100%;
+
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin-top: 10px;
+}
+
+.settings-panel__main__editor__text {
+    font-family: 'Open Sans', sans-serif;
+    color: #B8B8B8;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.settings-panel__main__editor__text-line {
+    width: 100%;
+}
+
+.settings-panel__main__editor-main__theme {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 100%;
+}
+
+.settings-panel__main__editor-main__theme-select-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: #2a2a2d;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 5px 0 5px 8px;
+}
+
+
+.settings-panel__main__editor-main__theme-select-btn:hover {
+    background-color: #36363a;
+}
+
+.settings-panel__main__editor-main__theme-select-btn img {
+    width: 13px;
+    margin-right: 8px;
+}
+
+.settings-panel__main__settings-name {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    font-size: 14px;
+}
+
+.settings-panel__main__editor-main__theme-select-btn-text {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+.settings-panel__main__font-main-select-content {
+    display: none;
+    position: absolute;
+    margin-top: 5%;
+    width: 30%;
+    height: 27%;
+    background-color: #2a2a2d;
+    overflow: scroll;
+}
+
+.settings-panel__main__font-main-select-content-text {
+    color: white;
+    padding: 2% 2% 2% 8px;
+    font-size: 13px;
+}
+
+.settings-panel__main__font-main-select-content-text:hover {
+    background-color: #36363a;
+}
+
+.settings-panel__main__font-main__font-select {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 5px;
+}
+
+.settings-panel__main__editor-main__theme-select {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 5px;
+}
+
+.settings-panel__main__editor-main__theme-select-content {
+    display: none;
+    position: absolute;
+    margin-top: 5%;
+    width: 30%;
+    height: 27%;
+    background-color: #2a2a2d;
+    overflow: scroll;
+}
+
+.settings-panel__main__editor-main__theme-select-content-text {
+    color: white;
+    padding: 2% 2% 2% 8px;
+    font-size: 13px;
+}
+
+.settings-panel__main__editor-main__theme-select-content-text:hover {
+    background-color: #36363a;
+}
+
+.settings-panel__main__editor-main__line-numbers {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.settings-panel__main__editor-main__line-numbers__checkbox {
+    margin-left: 5px;
+}

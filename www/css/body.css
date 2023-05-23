@@ -9,7 +9,8 @@ body {
     background: #1e1f22;
     color: white;
     height: 100%;
-    font-size: 80%;
+    font-size: 12px;
+    line-height: 1.5;
 }
 
 .settings {
@@ -32,7 +33,7 @@ body {
     align-items: center;
     height: 100%;
     position: absolute;
-    right: 30px;
+    right: 90px;
 }
 
 .settings__btn-run {
@@ -94,12 +95,15 @@ body {
 
 .settings__examples-select img {
     width: 14px;
+    margin-right: 5px;
 }
 
 .settings__examples-select-text {
     font-family: 'JetBrains Mono';
     color: white;
+    margin-left: 5px;
 }
+
 .settings__examples-select-content {
     display: none;
     width: 100%;
@@ -189,4 +193,38 @@ body {
     font-family: 'JetBrains Mono';
     font-size: 10px;
     color: #b8b8b8;
+}
+
+.settings__settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    right: 30px;
+}
+
+.settings__btn-settings {
+    font-family: 'JetBrains Mono';
+    background-color: #2a2a2d;
+    color: white;
+    border: none;
+    font-size: 100%;
+    height: 70%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings__btn-settings img {
+    width: 15px;
+    height: 15px;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.settings__btn-settings:hover {
+    background-color: #36363a;
 }
