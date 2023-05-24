@@ -1,3 +1,15 @@
+:root {
+    --var-header-logo-color: white;
+    --var-header-font-color: #b8b8b8;
+    --var-header-font-color-hover: white;
+}
+
+[light] {
+    --var-header-logo-color: black;
+    --var-header-font-color: #737373;
+    --var-header-font-color-hover: black;
+}
+
 .header {
     position: fixed;
     left: 0;
@@ -5,7 +17,7 @@
     width: 100%;
     height: 70px;
     z-index: 100;
-    background-color: #1e1f22;
+    background-color: var(--var-bg);
 }
 
 .header__vacuum {
@@ -26,7 +38,7 @@
 
 .header__logo span {
     font-family: 'JetBrains Mono';
-    color: white;
+    color: var(--var-header-logo-color);
     font-size: 130%;
 }
 
@@ -34,7 +46,8 @@
     position: absolute;
     right: 2%;
     display: flex;
-    align-items: baseline;
+    align-items: center;
+    color: var(--var-header-font-color);
 }
 
 .header__contents div {
@@ -44,10 +57,22 @@
 
 .header__contents a {
     font-family: 'JetBrains Mono';
-    color: #B8B8B8;
+    color: var(--var-header-font-color);
     text-decoration: none;
 }
 
 .header__contents a:hover {
-    color: white;
+    color: var(--var-header-font-color-hover);
+}
+
+.header__theme {
+    display: flex;
+}
+
+.header__theme img {
+    width: 18px;
+}
+
+.header__theme img:hover {
+    opacity: 0.6;
 }

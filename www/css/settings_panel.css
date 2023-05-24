@@ -1,8 +1,16 @@
+:root {
+    --var-font-color-name: #B8B8B8;
+}
+
+[light] {
+    --var-font-color-name: #414141;
+}
+
 .settings-panel {
     z-index: 100;
     position: absolute;
     display: none;
-    background-color: #1e1f22;
+    background-color: var(--var-bg);
     width: 50%;
     top: 35%;
     left: 25%;
@@ -26,7 +34,7 @@
 }
 
 .settings-panel__close-btn {
-    background-color: #1e1f22;
+    background-color: var(--var-btn-input-bg);
     border: none;
     border-radius: 2px;
 
@@ -34,7 +42,7 @@
 }
 
 .settings-panel__close-btn:hover {
-    background-color: #36363a;
+    background-color: var(--var-btn-input-bg-hover);
 }
 
 .settings-panel__close-btn img {
@@ -45,7 +53,7 @@
 
 .settings-panel__name {
     font-family: 'Open Sans', sans-serif;
-    color: #B8B8B8;
+    color: var(--var-font-color-name);
     font-size: 20px;
     margin-left: 5px;
 }
@@ -72,7 +80,7 @@
 
 .settings-panel__main__font__text {
     font-family: 'Open Sans', sans-serif;
-    color: #B8B8B8;
+    color: var(--var-font-color-name);
     font-size: 18px;
 }
 
@@ -82,7 +90,7 @@
 
 .settings-panel__main__font-main {
     font-family: 'Open Sans', sans-serif;
-    color: white;
+    color: var(--var-btn-input-font-color);
     width: 100%;
 
     display: flex;
@@ -106,10 +114,10 @@
     margin-left: 10px;
     width: 30px;
     height: 100%;
-    background-color: #2a2a2d;
+    background-color: var(--var-btn-input-bg);
     border: none;
     border-radius: 4px;
-    color: white;
+    color: var(--var-btn-input-font-color);
     outline: none;
     text-align: center;
 }
@@ -130,10 +138,10 @@
     margin-left: 10px;
     width: 30px;
     height: 100%;
-    background-color: #2a2a2d;
+    background-color: var(--var-btn-input-bg);
     border: none;
     border-radius: 4px;
-    color: white;
+    color: var(--var-btn-input-font-color);
     outline: none;
     text-align: center;
 }
@@ -156,14 +164,14 @@
     margin-top: 2px;
     border: none;
     border-radius: 4px;
-    background-color: #2a2a2d;
+    background-color: var(--var-btn-input-bg);
     justify-content: space-between;
     margin-bottom: 5px;
     padding: 5px 0 5px 8px;
 }
 
 .settings-panel__main__font-main__font-select-btn:hover {
-    background-color: #36363a;
+    background-color: var(--var-btn-input-bg-hover);
 }
 
 .settings-panel__main__font-main__font-select-btn img {
@@ -173,7 +181,7 @@
 
 .settings-panel__main__font-main__font-select-btn-text {
     font-family: 'Open Sans', sans-serif;
-    color: white;
+    color: var(--var-btn-input-font-color);
 }
 
 .settings-panel__main__editor {
@@ -193,7 +201,7 @@
 
 .settings-panel__main__editor-main {
     font-family: 'Open Sans', sans-serif;
-    color: white;
+    color: var(--var-btn-input-font-color);
     width: 100%;
 
     display: flex;
@@ -206,7 +214,7 @@
 
 .settings-panel__main__editor__text {
     font-family: 'Open Sans', sans-serif;
-    color: #B8B8B8;
+    color: var(--var-font-color-name);
     font-size: 18px;
     white-space: nowrap;
 }
@@ -230,7 +238,7 @@
     width: 100%;
     border: none;
     border-radius: 4px;
-    background-color: #2a2a2d;
+    background-color: var(--var-btn-input-bg);
     justify-content: space-between;
     margin-bottom: 5px;
     padding: 5px 0 5px 8px;
@@ -238,7 +246,7 @@
 
 
 .settings-panel__main__editor-main__theme-select-btn:hover {
-    background-color: #36363a;
+    background-color: var(--var-btn-input-bg-hover);
 }
 
 .settings-panel__main__editor-main__theme-select-btn img {
@@ -248,13 +256,13 @@
 
 .settings-panel__main__settings-name {
     font-family: 'Open Sans', sans-serif;
-    color: white;
+    color: var(--var-btn-input-font-color);
     font-size: 14px;
 }
 
 .settings-panel__main__editor-main__theme-select-btn-text {
     font-family: 'Open Sans', sans-serif;
-    color: white;
+    color: var(--var-btn-input-font-color);
 }
 
 .settings-panel__main__font-main-select-content {
@@ -263,18 +271,18 @@
     margin-top: 5%;
     width: 30%;
     height: 27%;
-    background-color: #2a2a2d;
+    background-color: var(--var-btn-input-bg);
     overflow: scroll;
 }
 
 .settings-panel__main__font-main-select-content-text {
-    color: white;
+    color: var(--var-btn-input-font-color);
     padding: 2% 2% 2% 8px;
     font-size: 13px;
 }
 
 .settings-panel__main__font-main-select-content-text:hover {
-    background-color: #36363a;
+    background-color: var(--var-btn-input-bg-hover);
 }
 
 .settings-panel__main__font-main__font-select {
@@ -297,18 +305,18 @@
     margin-top: 5%;
     width: 30%;
     height: 27%;
-    background-color: #2a2a2d;
+    background-color: var(--var-btn-input-bg);
     overflow: scroll;
 }
 
 .settings-panel__main__editor-main__theme-select-content-text {
-    color: white;
+    color: var(--var-btn-input-font-color);
     padding: 2% 2% 2% 8px;
     font-size: 13px;
 }
 
 .settings-panel__main__editor-main__theme-select-content-text:hover {
-    background-color: #36363a;
+    background-color: var(--var-btn-input-bg-hover);
 }
 
 .settings-panel__main__editor-main__line-numbers {
