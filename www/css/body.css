@@ -269,8 +269,8 @@ body {
 
 .settings__btn-format {
     font-family: 'JetBrains Mono';
-    background-color: #3474f0;
-    color: white;
+    background-color: var(--var-btn-input-bg);
+    color: var(--var-font-color);
     border: none;
     font-size: 100%;
     width: 100%;
@@ -282,5 +282,5 @@ body {
 }
 
 .settings__btn-format:hover {
-    background-color: #1e57d2;
+    background-color:var(--var-btn-input-bg-hover) ;
 }
