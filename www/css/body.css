@@ -257,3 +257,29 @@ body {
     border: none;
     height: 2px;
 }
+
+.settings__format {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    right: 200px;
+}
+
+.settings__btn-format {
+    font-family: 'JetBrains Mono';
+    background-color: #3474f0;
+    color: white;
+    border: none;
+    font-size: 100%;
+    width: 100%;
+    height: 70%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings__btn-format:hover {
+    background-color: #1e57d2;
+}

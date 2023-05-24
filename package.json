@@ -4,5 +4,9 @@
   "dependencies": {
     "@codemirror/view": "^6.9.5",
     "code-mirror-themes": "^1.0.0"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.19.5",
+    "prettier": "^2.8.8"
   }
 }

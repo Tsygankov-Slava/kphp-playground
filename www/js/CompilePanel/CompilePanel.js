@@ -86,7 +86,6 @@ export default class CompilePanel {
         this.#show();
 
         await this.#codeRunner.run(editor.getCode(), runArguments);
-        console.log(this.#codeRunner.getResult());
         if (!this.#codeRunner.getResult()['result_val_comp']) {
             this.#displayOutput();
         } else {

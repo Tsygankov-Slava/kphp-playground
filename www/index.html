@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="js/codemirror/themes/oceanic.css"/>
     <link rel="stylesheet" href="js/codemirror/themes/idle.css"/>
 
+    <script src="https://unpkg.com/prettier/standalone.js"></script>
+    <script src="https://unpkg.com/@prettier/plugin-php/standalone.js"></script>
+
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/body.css">
     <link rel="stylesheet" href="css/compile_panel.css">
@@ -93,6 +96,11 @@
             <div class="settings__run-arguments">
                 <div class="settings__run-arguments__text"> Run arguments: </div>
                 <input class="settings__run-arguments__input" id="settings__run-arguments__input" type="text">
+            </div>
+            <div class="settings__format">
+                <button class="settings__btn-format" id="settings__btn-format">
+                    { Format code }
+                </button>
             </div>
             <div class="settings__run">
                 <button class="settings__btn-run" id="settings__btn-run">
