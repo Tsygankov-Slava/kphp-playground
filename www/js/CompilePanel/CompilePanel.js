@@ -44,7 +44,7 @@ export default class CompilePanel {
         this.#console.innerHTML = text;
     }
     #setTextColor(color) {
-        this.#console.style.color = color;
+        this.#console.style = "color:" + color + " !important;";
     }
 
     #buildCompileTextForConsole(compilationOutput) {
@@ -73,7 +73,7 @@ export default class CompilePanel {
             this.#setTextColor("red");
         }
 
-        let buildLogForConsole = resultCompile["build_log_stderr"] + resultCompile["build_log_stdout"];
+        let buildLogForConsole = resultCompile["build_log"];
         this.#setText(buildLogForConsole);
     }
 
@@ -82,7 +82,7 @@ export default class CompilePanel {
 
         this.#displayBuildLog(false);
         this.#setText("Running code...");
-        this.#setTextColor("#B8B8B8");
+        this.#setTextColor("var(--var-font-color)");
         this.#show();
 
         await this.#codeRunner.run(editor.getCode(), runArguments);

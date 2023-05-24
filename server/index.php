@@ -1,53 +1,47 @@
 <?php
 
-require_once '../vendor/autoload.php';
-
 if (isset($_POST)) {
     $json = file_get_contents('php://input');
-    $obj = json_decode($json);
+    $obj = json_decode($json, true);
+
     /**
      * @param mixed $obj
+     * @return string|mixed
      */
-    function getCode(&$obj): string {
-        return !empty($obj->code) ? $obj->code : "";
+    function getCode($obj) {
+        return !empty($obj["code"]) ? $obj["code"] : "";
     }
 
     /**
      * @param mixed $obj
+     * @return string|mixed
      */
-    function getRunArguments(&$obj): string {
-        return !empty($obj->runArguments) ? $obj->runArguments : "";
+    function getRunArguments($obj) {
+        return !empty($obj["runArguments"]) ? $obj["runArguments"] : "";
     }
 
-    function createFileWithCode(string $code) {
+    /**
+     * @param mixed $code
+     */
+    function createFileWithCode($code) {
         $file = fopen("code.php", "w");
         fwrite($file, $code);
         fclose($file);
     }
 
     /**
-     * @param ?string[] $output_comp_stdout
-     * * @param ?string[] $output_comp_stderr
+     * @param mixed $output_comp
      */
-    function compile(&$output_comp_stdout, &$output_comp_stderr, ?int &$result_val) {
-        $command = "time /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php";
-        $proc = proc_open($command, [1 => ['pipe', 'w'], 2 => ['pipe','w']], $pipes);
-        $stdout = stream_get_contents($pipes[1]);
-        fclose($pipes[1]);
-        $stderr = stream_get_contents($pipes[2]);
-        fclose($pipes[2]);
-        proc_close($proc);
-
-        $output_comp_stdout = $stdout;
-        $output_comp_stderr = $stderr;
-
-        $result_val = empty($output_comp_stdout) ? 0 : 1;
+    function compile(&$output_comp, int &$result_val_comp) {
+        $command = "time /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php 2>&1";
+        exec($command, $output_comp, $result_val_comp);
     }
 
     /**
-     * @param ?string[] $output_run
+     * @param mixed $output_run
+     * @param mixed $runArguments
      */
-    function run(&$output_run, ?int &$result_val, string $runArguments) {
+    function run(&$output_run, int &$result_val, $runArguments) {
         $command = "./kphp_out/cli " . $runArguments;
         exec($command, $output_run, $result_val);
     }
@@ -55,32 +49,30 @@ if (isset($_POST)) {
     $code = getCode($obj);
     $runArguments = getRunArguments($obj);
 
-    /* @var ?string[] $output_comp_stdout */
-    $output_comp_stdout = [];
+    /* @var mixed $output_comp */
+    $output_comp = [];
 
-    /* @var ?string[] $output_comp_stderr */
-    $output_comp_stderr = [];
-
-    /* @var ?string[] $output_run */
+    /* @var mixed[] $output_run */
     $output_run = [];
 
-    /* @var ?int $result_val_comp */
-    $result_val_comp = null;
-
-    /* @var ?int $result_val_exec */
-    $result_val_exec = null;
+    $result_val_comp = 1;
+    $result_val_exec = 1;
 
     if (!empty($code)) {
         createFileWithCode($code);
-        compile($output_comp_stdout, $output_comp_stderr, $result_val_comp);
+        compile($output_comp, $result_val_comp);
         if (!$result_val_comp) {
             run($output_run, $result_val_exec, $runArguments);
         }
     }
 
+    $output_comp_str = "";
+    foreach ($output_comp as $str) {
+            $output_comp_str .= $str . "\n";
+    }
+
     $result = array(
-        "build_log_stdout" => $output_comp_stdout,
-        "build_log_stderr" => $output_comp_stderr,
+        "build_log" => $output_comp_str,
         "output" => $output_run,
         "result_val_comp" => $result_val_comp,
         "result_val_exec" => $result_val_exec
