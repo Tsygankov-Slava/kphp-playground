@@ -58,7 +58,7 @@ export default class ExamplesPanel {
     }
 
     #setDisplayProperty(e) {
-        if (this.#examplesSelectBtn.contains(e.target)) {
+        if (this.#examplesSelectBtn.contains(e.target) &&  this.#panelSelectContent.style.display === "none") {
             this.#panelSelectContent.style.display="inline-block";
         } else {
             this.#panelSelectContent.style.display="none";

@@ -93,7 +93,7 @@ export default class Settings {
     }
 
     #displayAllFonts(e) {
-        if (this.#fontSelectBtn.contains(e.target)) {
+        if (this.#fontSelectBtn.contains(e.target) && this.#fontSelectContent.style.display === "none") {
             this.#fontSelectContent.style.display="inline-block";
         } else {
             this.#fontSelectContent.style.display="none";
@@ -101,7 +101,7 @@ export default class Settings {
     }
 
     #displayAllThemes(e) {
-        if (this.#themeSelectBtn.contains(e.target)) {
+        if (this.#themeSelectBtn.contains(e.target) && this.#themeSelectContent.style.display === "none") {
             this.#themeSelectContent.style.display="inline-block";
         } else {
             this.#themeSelectContent.style.display="none";
