@@ -1,5 +1,5 @@
 export default class CodeRunner {
-    #url = "http://kphp-playground.ru/server/kphp_out/server";
+    #url = "https://kphp-playground.ru/server/kphp_out/server";
     #options;
     #result;
 
