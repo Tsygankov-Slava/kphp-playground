@@ -60,6 +60,10 @@ export default class Settings {
             this.#lineNumbers = true;
         }
         editor.editor.setOption("lineNumbers", this.#lineNumbers);
+
+        this.#fontSizeInput.addEventListener("input", this.#changeFontSize.bind(this));
+        this.#lineHeightInput.addEventListener("input", this.#changeLineHeight.bind(this));
+        this.#lineNumbersCheckbox.addEventListener("change", this.#changeLineNumbersState.bind(this));
     }
 
     #showPanel() {
@@ -72,7 +76,6 @@ export default class Settings {
         this.#fontSelectBtnText.innerHTML = (localStorage["font"]) ? localStorage["font"] : "JetBrains Mono";
         this.#themeSelectBtnText.innerHTML = (localStorage["theme"]) ? localStorage["theme"] : "friendship-bracelet";
 
-        console.log(localStorage["line-numbers"]);
         if (localStorage["line-numbers"] === "false") {
             this.#lineNumbersCheckbox.checked = false;
         } else {
@@ -83,11 +86,19 @@ export default class Settings {
     #closePanel() {
         this.#panel.style.display = "none";
         this.#editor.style.filter = "blur(0)";
+    }
 
+    #changeFontSize() {
         this.#editor.style.fontSize = this.#fontSizeInput.value + "px";
         localStorage.setItem("font-size", this.#fontSizeInput.value);
+    }
+
+    #changeLineHeight() {
         this.#editor.style.lineHeight = this.#lineHeightInput.value;
         localStorage.setItem("line-height", this.#lineHeightInput.value);
+    }
+
+    #changeLineNumbersState() {
         editor.editor.setOption("lineNumbers", this.#lineNumbersCheckbox.checked);
         localStorage.setItem("line-numbers", this.#lineNumbersCheckbox.checked);
     }
