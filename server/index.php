@@ -33,7 +33,7 @@ if (isset($_POST)) {
      * @param mixed $output_comp
      */
     function compile(&$output_comp, int &$result_val_comp) {
-        $command = "time /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php 2>&1";
+        $command = "kphp -M cli ./code.php 2>&1";
         exec($command, $output_comp, $result_val_comp);
     }
 
@@ -42,7 +42,7 @@ if (isset($_POST)) {
      * @param mixed $runArguments
      */
     function run(&$output_run, int &$result_val, $runArguments) {
-        $command = "./kphp_out/cli " . $runArguments;
+        $command = "./kphp_out/cli " . $runArguments . " --Xkphp-options -u root";
         exec($command, $output_run, $result_val);
     }
 
