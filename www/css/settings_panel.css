@@ -122,12 +122,7 @@
     text-align: center;
 }
 
-.settings-panel__main__font-main__size-input:focus {
-    border: 1px solid white;
-}
-
 .settings-panel__main__font-main__line-height {
-    width: 20%;
     display: flex;
     align-items: baseline;
     flex-direction: row;
@@ -144,10 +139,6 @@
     color: var(--var-btn-input-font-color);
     outline: none;
     text-align: center;
-}
-
-.settings-panel__main__font-main__line-height-input:focus {
-    border: 1px solid white;
 }
 
 .settings-panel__main__font-main__font {
@@ -321,11 +312,11 @@
 
 .settings-panel__main__editor-main__line-numbers {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: row;
     margin-top: 10px;
 }
 
-.settings-panel__main__editor-main__line-numbers__checkbox {
-    margin-left: 5px;
+#settings-panel__main__editor-main__line-numbers__checkbox {
+    margin-left: 10px;
 }
