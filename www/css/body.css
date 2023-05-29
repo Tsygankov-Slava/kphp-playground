@@ -68,23 +68,24 @@ body {
     height: 70%;
     border-radius: 8px;
     display: flex;
-    flex-direction: row;
     align-items: center;
     margin-right: 5%;
+    padding: 0;
 }
 
 .settings__btn-run:hover {
     background-color: #1e57d2;
+    cursor: pointer;
 }
 
 .settings__btn-run img {
     width: 14px;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .settings__btn-run span {
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .settings__examples {
@@ -100,31 +101,32 @@ body {
 
 .settings__examples-select {
     display: flex;
-    flex-direction: row;
     align-items: center;
     margin-top: 2px;
+    margin-bottom: 5px;
+    padding: 0;
     height: 60%;
     width: 100%;
     border: none;
     border-radius: 4px;
     background-color: var(--var-btn-input-bg);
     justify-content: space-between;
-    margin-bottom: 5px;
 }
 
 .settings__examples-select:hover {
     background-color: var(--var-btn-input-bg-hover);
+    cursor: pointer;
 }
 
 .settings__examples-select img {
     width: 14px;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .settings__examples-select-text {
     font-family: 'JetBrains Mono';
     color: var(--var-btn-input-font-color);
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .settings__examples-select-content {
@@ -155,18 +157,17 @@ body {
 .settings__run-arguments__input {
     font-family: 'JetBrains Mono', monospace;
     display: flex;
-    flex-direction: row;
     align-items: center;
     margin-top: 2px;
-    height: 56%;
+    height: 52%;
     width: 100%;
     border-radius: 4px;
     background-color: var(--var-btn-input-bg);
     color: var(--var-btn-input-font-color);
-    font-size: 90%;
     outline: none;
-    padding-left: 5px;
-    border: none;
+    font-size: 90%;
+    padding-left: 10px;
+    border: 1px solid var(--var-btn-input-bg);
 }
 
 .settings__run-arguments__input:focus {
@@ -176,6 +177,7 @@ body {
 .settings__run-arguments__text {
     font-size: 10px;
     color: var(--var-font-color);
+
 }
 
 .settings__refresh {
@@ -204,6 +206,7 @@ body {
 
 .settings__btn-refresh:hover {
     background-color: var(--var-btn-input-bg-hover);
+    cursor: pointer;
 }
 
 .settings__btn-refresh img {
@@ -249,6 +252,7 @@ body {
 
 .settings__btn-settings:hover {
     background-color: var(--var-btn-input-bg-hover);
+    cursor: pointer;
 }
 
 .hr {
@@ -273,16 +277,21 @@ body {
     color: var(--var-font-color);
     border: none;
     font-size: 100%;
-    width: 100%;
     height: 70%;
     border-radius: 8px;
     display: flex;
-    flex-direction: row;
     align-items: center;
+    padding: 0;
+}
+
+.settings__btn-format span{
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .settings__btn-format:hover {
     background-color:var(--var-btn-input-bg-hover) ;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {

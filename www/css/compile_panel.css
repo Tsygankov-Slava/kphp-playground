@@ -52,7 +52,7 @@
     color: var(--var-btn-input-font-color);
     display: flex;
     align-items: center;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .compile_panel__header__build-log-btn {
@@ -90,6 +90,7 @@
 }
 
 .compile_panel__console {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 15px;
     color: var(--var-font-color) !important;
     padding-left: 8px;

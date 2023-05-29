@@ -63,6 +63,7 @@
 
 .header__contents a:hover {
     color: var(--var-header-font-color-hover);
+    cursor: pointer;
 }
 
 .header__theme {
@@ -75,4 +76,5 @@
 
 .header__theme img:hover {
     opacity: 0.6;
+    cursor: pointer;
 }
