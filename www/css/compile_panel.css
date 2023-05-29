@@ -93,7 +93,7 @@
     font-size: 15px;
     color: var(--var-font-color) !important;
     padding-left: 8px;
-    overflow: scroll;
+    overflow: auto;
     height: 180px;
     line-height: 1.5;
     min-height: 75%;
