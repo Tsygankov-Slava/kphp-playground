@@ -284,3 +284,7 @@ body {
 .settings__btn-format:hover {
     background-color:var(--var-btn-input-bg-hover) ;
 }
+
+::-webkit-scrollbar {
+    width: 0;
+}

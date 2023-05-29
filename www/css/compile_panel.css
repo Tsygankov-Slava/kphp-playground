@@ -8,6 +8,7 @@
     height: 30%;
     background: var(--var-bg);
     min-height: 30%;
+    max-height: 85%;
 }
 
 .compile_panel__header {
@@ -96,4 +97,8 @@
     height: 180px;
     line-height: 1.5;
     min-height: 75%;
+}
+
+.compile_panel__console::-webkit-scrollbar {
+    width: 0;
 }
