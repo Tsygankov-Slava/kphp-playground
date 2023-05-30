@@ -42,6 +42,7 @@ body {
     top: 68px;
     z-index: 100;
     width: 100%;
+    min-width: 900px;
     height: 55px;
     display: flex;
     flex-direction: row;
@@ -91,6 +92,7 @@ body {
 .settings__examples {
     height: 100%;
     width: 18%;
+    min-width: 200px;
 }
 
 .settings__examples-text {

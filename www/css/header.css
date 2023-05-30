@@ -15,6 +15,7 @@
     left: 0;
     top: 0;
     width: 100%;
+    min-width: 900px;
     height: 70px;
     z-index: 100;
     background-color: var(--var-bg);
