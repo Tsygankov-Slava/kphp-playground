@@ -182,7 +182,6 @@
 .settings-panel__main__font-main__font-select-btn img {
     width: 13px;
     margin-right: 8px;
-    margin-left: 40px;
 }
 
 .settings-panel__main__font-main__font-select-btn-text {
@@ -260,7 +259,6 @@
 .settings-panel__main__editor-main__theme-select-btn img {
     width: 13px;
     margin-right: 8px;
-    margin-left: 40px;
 }
 
 .settings-panel__main__settings-name {
@@ -277,7 +275,7 @@
 .settings-panel__main__font-main-select-content {
     display: none;
     position: absolute;
-    width: 30%;
+    width: 220px;
     height: 54px;
     background-color: var(--var-btn-input-bg);
     overflow: auto;
@@ -294,17 +292,19 @@
 }
 
 .settings-panel__main__font-main__font-select {
+    width: 220px;
     margin-left: 5px;
 }
 
 .settings-panel__main__editor-main__theme-select {
+    width: 220px;
     margin-left: 5px;
 }
 
 .settings-panel__main__editor-main__theme-select-content {
     display: none;
     position: absolute;
-    width: 30%;
+    width: 220px;
     height: 54px;
     background-color: var(--var-btn-input-bg);
     overflow: auto;

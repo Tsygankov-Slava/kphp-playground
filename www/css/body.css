@@ -289,6 +289,7 @@ body {
 .settings__btn-format span{
     margin-left: 15px;
     margin-right: 15px;
+    line-height: 0;
 }
 
 .settings__btn-format:hover {
