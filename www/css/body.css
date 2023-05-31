@@ -192,10 +192,9 @@ body {
 
 .settings__refresh .tooltip-text {
     visibility: hidden;
-    width: 120px;
+    width: 190px;
     background-color: var(--var-btn-input-bg);
     color: var(--var-font-color);
-    text-align: center;
     margin-top: 55px;
     border-radius: 6px;
     position: absolute;
@@ -205,7 +204,7 @@ body {
     margin-left: 4px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    padding: 5px;
+    padding: 5px 5px 5px 6px;
 }
 
 .settings__refresh:hover .tooltip-text {
