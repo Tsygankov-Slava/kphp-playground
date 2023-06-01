@@ -33,10 +33,10 @@ if (isset($_POST)) {
      * @param mixed $output_comp
      */
     function compile(&$output_comp, int &$result_val_comp) {
-        $command = "/Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php 2>&1";
+        $command = "kphp -M cli ./code.php 2>&1";
 
         // for debug
-        // $command = "kphp -M cli ./code.php 2>&1";
+        // $command = "/Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php 2>&1";
 
         exec($command, $output_comp, $result_val_comp);
     }
