@@ -31,6 +31,15 @@ The [KPHP Playground](https://kphp-playground.ru/) is a place where you can run 
 - - [Compile and run project for deploy on KPHP](#compile-and-run-project-for-deploy-on-kphp)
 - [License](#license)
 
+# Features
+- Attractive and simple UI
+- Ability to run programs with arguments
+- Ready-made examples
+- Formatting the code
+- Dark and light theme
+- The ability to edit fonts and editor for yourself
+
+[🔝Table of contents](#table-of-contents)
 
 # UI
 ## Additional sources
@@ -114,18 +123,6 @@ In order to go to the settings, you need to click on the gear.
 ![](docs/images/settings_line-numbers.png)
 
 [🔝Table of contents](#table-of-contents)
-
-
-# Features
-- Attractive and simple UI
-- Ability to run programs with arguments
-- Ready-made examples
-- Formatting the code
-- Dark and light theme
-- The ability to edit fonts and editor for yourself
-
-[🔝Table of contents](#table-of-contents)
-
 
 # Developing
 If you want to contribute to this project and engage in development , then for this you will need:
