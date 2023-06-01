@@ -49,6 +49,11 @@ export default class CompilePanel {
 
     #buildCompileTextForConsole(compilationOutput) {
         let compileTextForConsole = "";
+
+	const serviceStrIndex = compilationOutput[0].indexOf("root");
+	if (serviceStrIndex != -1) {
+	 	compilationOutput[0] = compilationOutput[0].slice(serviceStrIndex + 4);
+	}
         for (let i = 0; i < compilationOutput.length; i++) {
             compileTextForConsole += compilationOutput[i] + '<br>';
         }
