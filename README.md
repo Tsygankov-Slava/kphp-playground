@@ -10,7 +10,7 @@ The [KPHP Playground](https://kphp-playground.ru/) is a place where you can run 
 - [Features](#features)
 - [UI](#ui)
 - - [Additional sources](#additional-sources)
-- - [Change theme (light | dark)](#change-theme--light--dark-)
+- - [Change theme](#change-theme)
 - - [Run code](#run-code)
 - - - [Build Log](#build-log)
 - - - [Output](#output)
@@ -22,11 +22,11 @@ The [KPHP Playground](https://kphp-playground.ru/) is a place where you can run 
 - - - [Font settings](#font-settings)
 - - - [Editor settings](#editor-settings)
 - [Developing](#developing)
-- - [Install PHP (for fast testing code)](#install-php--for-fast-testing-code-)
+- - [Install PHP (for fast testing code)](#install-php-for-fast-testing-code)
 - - - [For Linux](#for-linux)
 - - - [For macOS](#for-macos)
 - - - [Check installation](#check-installation)
-- - [Install KPHP (for compile project)](#install-kphp--for-compile-project-)
+- - [Install KPHP (for compile project)](#install-kphp-for-compile-project)
 - - [Install and run project for developing on PHP](#install-and-run-project-for-developing-on-php)
 - - [Compile and run project for deploy on KPHP](#compile-and-run-project-for-deploy-on-kphp)
 - [License](#license)
@@ -42,7 +42,7 @@ If you want to learn more about KPHP, then there are several useful links in the
 
 ![](docs/images/additional_sources.png)
 
-## Change theme (light | dark)
+## Change theme
 The `KPHP Playground` supports changing the theme. You can choose a dark or light theme depending on your tastes.
 
 ![](docs/images/change_theme.png)
