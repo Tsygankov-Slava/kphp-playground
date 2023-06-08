@@ -1,0 +1,83 @@
+.keyboards-shortcuts_help {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.keyboards-shortcuts_help_btn {
+    font-family: 'JetBrains Mono';
+    background-color: var(--var-btn-input-bg);
+    color: var(--var-btn-input-font-color);
+    border: 1px solid var(--var-hr-bg);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+.keyboards-shortcuts_help_btn:hover {
+    cursor: pointer;
+    background-color: var(--var-btn-input-bg-hover);
+}
+
+.keyboards-shortcuts_help_content {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--var-btn-input-font-color);
+    font-size: 18px;
+    position: absolute;
+    display: none;
+    width: 280px;
+    background: var(--var-btn-input-bg);
+    right: 55px;
+    bottom: 50px;
+    border-radius: 10px;
+}
+
+.keyboards-shortcuts_help_content__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 15px 0 15px;
+    align-items: center;
+}
+
+.keyboards-shortcuts_help_content__header_close-btn img {
+    width: 14px;
+    height: 14px;
+}
+
+.keyboards-shortcuts_help_content__header_close-btn {
+    display: flex;
+    align-items: center;
+}
+
+.keyboards-shortcuts_help_content__header_close-btn:hover {
+    cursor: pointer;
+}
+
+.keyboards-shortcuts_help_content__main {
+    margin-bottom: 15px;
+}
+
+.keyboards-shortcuts_help_content__main_keyboard {
+    margin: 15px;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.keyboards-shortcuts_help_content__main_keyboard-combination-btn {
+    border-radius: 2px;
+    background: var(--var-btn-input-bg-hover);
+    color: var(--var-font-color);
+    font-size: 16px;
+    padding: 2px 4px 2px 4px;
+}

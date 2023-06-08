@@ -8,6 +8,7 @@ export default class ThemeManager {
     #downArrowSettingsTheme = document.getElementById("settings-panel__main__editor-main__theme-select-btn__img");
     #closeSettingsBtn = document.getElementById("settings-panel__close-btn__img");
     #hideCompilePanelBtn = document.getElementById("compile_panel__header__img-hide");
+    #closeHelpPanel = document.getElementById("keyboards-shortcuts_help_content__header_close-btn__img");
 
     constructor() {
         if (this.#theme == "light") {
@@ -38,6 +39,7 @@ export default class ThemeManager {
         this.#downArrowSettingsTheme.src = "images/light/down-arrow.png";
         this.#closeSettingsBtn.src = "images/light/close.png";
         this.#hideCompilePanelBtn.src = "images/light/hide-compile_panel-btn.png";
+        this.#closeHelpPanel.src = "images/light/close.png";
     }
 
     #setDarkTheme() {
@@ -53,5 +55,6 @@ export default class ThemeManager {
         this.#downArrowSettingsTheme.src = "images/dark/down-arrow.png";
         this.#closeSettingsBtn.src = "images/dark/close.png";
         this.#hideCompilePanelBtn.src = "images/dark/hide-compile_panel-btn.png";
+        this.#closeHelpPanel.src = "images/dark/close.png";
     }
 }

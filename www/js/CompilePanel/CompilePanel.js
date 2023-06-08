@@ -11,11 +11,12 @@ export default class CompilePanel {
     #buildLogBtn = document.getElementById("compile_panel__header__build-log-btn");
     #outputBtn = document.getElementById("compile_panel__header__output-btn");
     #runArgumentsInput = document.getElementById("settings__run-arguments__input");
+    #helpBtn = document.getElementById("keyboards-shortcuts_help");
 
     #codeRunner = new CodeRunner;
 
     constructor() {
-        this.#hideBtn.addEventListener('click', this.#hidden.bind(this) );
+        this.#hideBtn.addEventListener('click', this.hidden.bind(this) );
         this.#runBtn.addEventListener('click', this.runCompile.bind(this));
 
         this.#buildLogBtn.addEventListener('click', this.#displayBuildLog.bind(this));
@@ -29,14 +30,17 @@ export default class CompilePanel {
         if (localStorage['runArguments']) {
             this.#runArgumentsInput.value = localStorage['runArguments'];
         }
+        if (localStorage['build_log']) {
+            this.#setText(localStorage['build_log']);
+        }
     }
 
-    #hidden() {
+    hidden() {
         this.#panel.style.visibility = "hidden";
         this.#editorScroll.style.height = "100%";
     }
 
-    #show() {
+    show() {
         this.#panel.style.visibility = "visible";
     }
 
@@ -50,10 +54,10 @@ export default class CompilePanel {
     #buildCompileTextForConsole(compilationOutput) {
         let compileTextForConsole = "";
 
-	const serviceStrIndex = compilationOutput[0].indexOf("root");
-	if (serviceStrIndex != -1) {
-	 	compilationOutput[0] = compilationOutput[0].slice(serviceStrIndex + 4);
-	}
+        const serviceStrIndex = compilationOutput[0].indexOf("root");
+        if (serviceStrIndex != -1) {
+            compilationOutput[0] = compilationOutput[0].slice(serviceStrIndex + 4);
+        }
         for (let i = 0; i < compilationOutput.length; i++) {
             compileTextForConsole += compilationOutput[i] + '<br>';
         }
@@ -62,23 +66,33 @@ export default class CompilePanel {
 
     #displayCompileTextToConsole() {
         const resultCompile = this.#codeRunner.getResult();
-        let text = resultCompile["output"];
-        if (resultCompile["result_val_comp"]) {
-            this.#displayBuildLogToConsole();
-            text = "";
+        let compileTextForConsole;
+        if (!resultCompile) {
+            compileTextForConsole = localStorage['output'];
+        } else {
+            let text = resultCompile["output"];
+            if (resultCompile["result_val_comp"]) {
+                this.#displayBuildLogToConsole();
+                text = "";
+            }
+            compileTextForConsole = this.#buildCompileTextForConsole(text);
         }
-
-        let compileTextForConsole = this.#buildCompileTextForConsole(text);
+        localStorage.setItem('output', compileTextForConsole);
         this.#setText(compileTextForConsole);
     }
 
     #displayBuildLogToConsole() {
         const resultCompile = this.#codeRunner.getResult();
-        if (resultCompile["result_val_comp"]) {
-            this.#setTextColor("red");
+        let buildLogForConsole;
+        if (resultCompile) {
+            if (resultCompile["result_val_comp"]) {
+                this.#setTextColor("red");
+            }
+            buildLogForConsole = resultCompile["build_log"];
+        } else {
+            buildLogForConsole = localStorage["build_log"];
         }
-
-        let buildLogForConsole = resultCompile["build_log"];
+        localStorage.setItem('build_log', buildLogForConsole);
         this.#setText(buildLogForConsole);
     }
 
@@ -88,7 +102,7 @@ export default class CompilePanel {
         this.#displayBuildLog(false);
         this.#setText("Running code...");
         this.#setTextColor("var(--var-font-color)");
-        this.#show();
+        this.show();
 
         await this.#codeRunner.run(editor.getCode(), runArguments);
         if (!this.#codeRunner.getResult()['result_val_comp']) {
@@ -147,5 +161,9 @@ export default class CompilePanel {
 
     #saveValueToLocalStorage() {
         localStorage.setItem('runArguments', this.#runArgumentsInput.value)
+    }
+
+    isVisible() {
+        return this.#panel.style.visibility === "visible";
     }
 }

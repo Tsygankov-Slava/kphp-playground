@@ -66,6 +66,14 @@ export default class Settings {
         this.#lineNumbersCheckbox.addEventListener("change", this.#changeLineNumbersState.bind(this));
     }
 
+    displayPanel() {
+        if (this.#panel.style.display === "none" || this.#panel.style.display === '') {
+            this.#showPanel();
+        } else {
+            this.#closePanel();
+        }
+    }
+
     #showPanel() {
         this.#panel.style.display = "flex";
         this.#editor.style.filter = "blur(1px)";
@@ -88,9 +96,14 @@ export default class Settings {
         this.#editor.style.filter = "blur(0)";
     }
 
-    #changeFontSize() {
-        this.#editor.style.fontSize = this.#fontSizeInput.value + "px";
-        localStorage.setItem("font-size", this.#fontSizeInput.value);
+    #changeFontSize(isInput = true) {
+        if (isInput) {
+            this.#editor.style.fontSize = this.#fontSizeInput.value + "px";
+            localStorage.setItem("font-size", this.#fontSizeInput.value);
+        } else {
+            this.#editor.style.fontSize = this.#fontSize + "px";
+            localStorage.setItem("font-size", this.#fontSize);
+        }
     }
 
     #changeLineHeight() {
@@ -132,5 +145,15 @@ export default class Settings {
         localStorage.setItem("theme", themeName);
 
         editor.editor.setOption("theme", themeName);
+    }
+
+    getFontSize() {
+        return this.#fontSize;
+    }
+
+    setFontSize(size) {
+        this.#fontSize = size;
+        this.#changeFontSize(false);
+        console.log(this.#fontSize);
     }
 }

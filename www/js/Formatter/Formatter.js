@@ -4,10 +4,10 @@ export default class Formatter {
     #formatBtn = document.getElementById("settings__btn-format");
     #output;
     constructor() {
-        this.#formatBtn.addEventListener('click', this.#format.bind(this));
+        this.#formatBtn.addEventListener('click', this.format.bind(this));
     }
 
-    #format() {
+    format() {
         try {
             this.#output = prettier.format(editor.getCode(), {
                 plugins: prettierPlugins,
