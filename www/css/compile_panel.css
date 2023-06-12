@@ -96,9 +96,8 @@
     flex-direction: row;
     padding-left: 8px;
     overflow: auto;
-    height: 180px;
     line-height: 1.5;
-    min-height: 75%;
+    min-height: 78%;
 }
 
 .compile_panel__console-text {
