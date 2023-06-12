@@ -9,26 +9,27 @@ The [KPHP Playground](https://kphp-playground.ru/) is a place where you can run 
 # Table of contents
 - [Features](#features)
 - [UI](#ui)
-- - [Additional sources](#additional-sources)
-- - [Change theme](#change-theme)
-- - [Run code](#run-code)
-- - - [Build Log](#build-log)
-- - - [Output](#output)
-- - [Examples](#examples)
-- - [Refresh example](#refresh-example)
-- - [Run arguments](#run-arguments)
-- - [Format code](#format-code)
-- - [Settings](#settings)
-- - - [Font settings](#font-settings)
-- - - [Editor settings](#editor-settings)
+    - [Additional sources](#additional-sources)
+    - [Change theme](#change-theme)
+    - [Run code](#run-code)
+        - [Build Log](#build-log)
+        - [Output](#output)
+    - [Examples](#examples)
+    - [Refresh example](#refresh-example)
+    - [Run arguments](#run-arguments)
+    - [Format code](#format-code)
+    - [Keyboard shortcuts](#keyboard-shortcuts)
+    - [Settings](#settings)
+        - [Font settings](#font-settings)
+        - [Editor settings](#editor-settings)
 - [Developing](#developing)
-- - [Install PHP (for fast testing code)](#install-php-for-fast-testing-code)
-- - - [For Linux](#for-linux)
-- - - [For macOS](#for-macos)
-- - - [Check installation](#check-installation)
-- - [Install KPHP (for compile project)](#install-kphp-for-compile-project)
-- - [Install and run project for developing on PHP](#install-and-run-project-for-developing-on-php)
-- - [Compile and run project for deploy on KPHP](#compile-and-run-project-for-deploy-on-kphp)
+    - [Install PHP (for fast testing code)](#install-php-for-fast-testing-code)
+        - [For Linux](#for-linux)
+        - [For macOS](#for-macos)
+        - [Check installation](#check-installation)
+    - [Install KPHP (for compile project)](#install-kphp-for-compile-project)
+    - [Install and run project for developing on PHP](#install-and-run-project-for-developing-on-php)
+    - [Compile and run project for deploy on KPHP](#compile-and-run-project-for-deploy-on-kphp)
 - [License](#license)
 
 # Features
@@ -38,6 +39,7 @@ The [KPHP Playground](https://kphp-playground.ru/) is a place where you can run 
 - Formatting the code
 - Dark and light theme
 - The ability to edit fonts and editor for yourself
+- Contains keyboards shortcuts
 
 [🔝Table of contents](#table-of-contents)
 
@@ -97,6 +99,11 @@ The style of the code is very important, so `KPHP Playground` provides an opport
 To do this, click on the `{ Format code }` button.
 
 ![](docs/images/format_code.png)
+
+## Keyboard shortcuts
+`KPHP Playground` contains several keyboard shortcuts to increase usability.
+
+![](docs/images/keyboards_shortcuts.png)
 
 ## Settings
 `KPHP Playground` provides the ability to configure some parameters so that it's comfortable for you to write code. \
@@ -184,7 +191,7 @@ $ cd kphp-playground
 $ php -S localhost:8000
 ```
 4. Open [http://localhost:8000/www/index.html](http://localhost:8000/www/index.html) in browser. \
-If everything went well, you should observe the main page of the project:
+   If everything went well, you should observe the main page of the project:
 
 ![](docs/images/main_page.png)
 
@@ -200,7 +207,7 @@ $ kphp index.php
 2. Run server:
 ```
 $ cd kphp_out/
-$ ./server -H 8080 -f 1
+$ ./server -H 8080 -f 1 -t 420
 ```
 3. After starting the `kphp server`, you should go to http://localhost:8080/ and see the server page:
 
