@@ -66,38 +66,47 @@ export default class CompilePanel {
     }
 
     #displayCompileTextToConsole() {
-        const resultCompile = this.#codeRunner.getResult();
         let compileTextForConsole;
-        if (!resultCompile) {
-            compileTextForConsole = localStorage['output'];
-        } else {
-            let text = resultCompile["output"];
-            if (resultCompile["result_val_comp"]) {
-                this.#displayBuildLogToConsole();
-                text = "";
+        if (localStorage["isRunningCode"] === "false") {
+            const resultCompile = this.#codeRunner.getResult();
+            if (!resultCompile) {
+                compileTextForConsole = localStorage['output'];
+            } else {
+                let text = resultCompile["output"];
+                if (resultCompile["result_val_comp"]) {
+                    this.#displayBuildLogToConsole();
+                    text = "";
+                }
+                compileTextForConsole = this.#buildCompileTextForConsole(text);
             }
-            compileTextForConsole = this.#buildCompileTextForConsole(text);
+        } else {
+            compileTextForConsole = "Running code"
         }
         localStorage.setItem('output', compileTextForConsole);
         this.#setText(compileTextForConsole);
     }
 
     #displayBuildLogToConsole() {
-        const resultCompile = this.#codeRunner.getResult();
         let buildLogForConsole;
-        if (resultCompile) {
-            if (resultCompile["result_val_comp"]) {
-                this.#setTextColor("red");
+        if (localStorage["isRunningCode"] === "false") {
+            const resultCompile = this.#codeRunner.getResult();
+            if (resultCompile) {
+                if (resultCompile["result_val_comp"]) {
+                    this.#setTextColor("red");
+                }
+                buildLogForConsole = resultCompile["build_log"];
+            } else {
+                buildLogForConsole = localStorage["build_log"];
             }
-            buildLogForConsole = resultCompile["build_log"];
         } else {
-            buildLogForConsole = localStorage["build_log"];
+            buildLogForConsole = "Running code";
         }
         localStorage.setItem('build_log', buildLogForConsole);
         this.#setText(buildLogForConsole);
     }
 
     async runCompile() {
+        localStorage.setItem("isRunningCode", true);
         const runArguments = this.#runArgumentsInput.value;
 
         this.#displayBuildLog(false);
@@ -107,11 +116,13 @@ export default class CompilePanel {
         this.show();
 
         await this.#codeRunner.run(editor.getCode(), runArguments);
+        localStorage["isRunningCode"] = false;
         if (!this.#codeRunner.getResult()['result_val_comp']) {
             this.#displayOutput();
         } else {
             this.#displayBuildLog();
         }
+
         this.#loader.style.visibility = "hidden";
         this.#generateEditorHeight();
     }
