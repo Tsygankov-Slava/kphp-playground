@@ -54,36 +54,40 @@ if (isset($_POST)) {
         exec($command, $output_run, $result_val);
     }
 
-    $code = getCode($obj);
-    $runArguments = getRunArguments($obj);
+    if ($obj["state"] == "build") {
+        /* @var mixed $output_comp */
+        $output_comp = [];
+        $result_val_comp = 1;
 
-    /* @var mixed $output_comp */
-    $output_comp = [];
-
-    /* @var mixed[] $output_run */
-    $output_run = [];
-
-    $result_val_comp = 1;
-    $result_val_exec = 1;
-
-    if (!empty($code)) {
-        createFileWithCode($code);
-        compile($output_comp, $result_val_comp);
-        if (!$result_val_comp) {
-            run($output_run, $result_val_exec, $runArguments);
+        $code = getCode($obj);
+        if (!empty($code)) {
+            createFileWithCode($code);
+            compile($output_comp, $result_val_comp);
         }
-    }
 
-    $output_comp_str = "";
-    foreach ($output_comp as $str) {
+        $output_comp_str = "";
+        foreach ($output_comp as $str) {
             $output_comp_str .= $str . "\n";
+        }
+
+        $result = array(
+            "build_log" => $output_comp_str,
+            "result_val_comp" => $result_val_comp,
+        );
+
+    } else {
+        /* @var mixed[] $output_run */
+        $output_run = [];
+        $result_val_exec = 1;
+
+        $runArguments = getRunArguments($obj);
+        run($output_run, $result_val_exec, $runArguments);
+
+        $result = array(
+            "output" => $output_run,
+            "result_val_exec" => $result_val_exec
+        );
     }
 
-    $result = array(
-        "build_log" => $output_comp_str,
-        "output" => $output_run,
-        "result_val_comp" => $result_val_comp,
-        "result_val_exec" => $result_val_exec
-    );
     echo json_encode($result);
 }

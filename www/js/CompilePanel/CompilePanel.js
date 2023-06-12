@@ -61,13 +61,12 @@ export default class CompilePanel {
     }
 
     #buildCompileTextForConsole(compilationOutput) {
-        console.log(compilationOutput);
         let compileTextForConsole = "";
-
         const serviceStrIndex = compilationOutput[0].indexOf("root");
         if (serviceStrIndex !== -1) {
             compilationOutput[0] = compilationOutput[0].slice(serviceStrIndex + 4);
         }
+
         for (let i = 0; i < compilationOutput.length; i++) {
             compileTextForConsole += compilationOutput[i] + '<br>';
         }
@@ -79,13 +78,14 @@ export default class CompilePanel {
         localStorage.setItem("output", "");
         localStorage.setItem("build_log_color", "var(--var-font-color)");
         localStorage.setItem("state", "compile");
+
         if (await this.#build()) {
             await this.#run();
-
         } else {
             this.#loader.style.visibility = "hidden";
             this.#setText(this.#buildingResult["build_log"]);
             this.#setTextColor("red");
+            localStorage["build_log"] = this.#buildingResult["build_log"];
             localStorage["build_log_color"] = "red";
             localStorage["output"] = "";
         }
@@ -113,6 +113,7 @@ export default class CompilePanel {
 
         this.#setOutputInPanel();
         this.#setText("Running code");
+        this.#setTextColor("var(--var-font-color)");
         this.#loader.style.visibility = "visible";
 
         await this.#codeRunner.run(runArguments);
@@ -150,10 +151,12 @@ export default class CompilePanel {
 
     #displayOutput() {
         this.#setOutputInPanel();
+        this.#setText("");
+        this.#loader.style.visibility = "hidden";
         if (localStorage["output"] !== "") {
             this.#setText(localStorage["output"]);
             this.#loader.style.visibility = "hidden";
-        } else if (localStorage["build_log"] !== "") {
+        } else if (localStorage["build_log"] !== "" && !this.#buildingResult["result_val_comp"]) {
             this.#setText("Running code");
             this.#loader.style.visibility = "visible";
         }
