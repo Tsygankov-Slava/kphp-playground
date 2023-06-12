@@ -5,12 +5,13 @@ export default class CompilePanel {
     #panel = document.getElementById("compile_panel");
     #header = document.getElementById("compile_panel__header");
     #hideBtn = document.getElementById("compile_panel__header__btn-hide");
-    #console = document.getElementById("compile_panel__console");
+    #console = document.getElementById("compile_panel__console-text");
     #runBtn = document.getElementById("settings__btn-run");
     #editorScroll = document.getElementsByClassName("CodeMirror-scroll")[0];
     #buildLogBtn = document.getElementById("compile_panel__header__build-log-btn");
     #outputBtn = document.getElementById("compile_panel__header__output-btn");
     #runArgumentsInput = document.getElementById("settings__run-arguments__input");
+    #loader = document.getElementById("ballsWaveG");
     #helpBtn = document.getElementById("keyboards-shortcuts_help");
 
     #codeRunner = new CodeRunner;
@@ -100,7 +101,8 @@ export default class CompilePanel {
         const runArguments = this.#runArgumentsInput.value;
 
         this.#displayBuildLog(false);
-        this.#setText("Running code...");
+        this.#setText("Running code");
+        this.#loader.style.visibility = "visible";
         this.#setTextColor("var(--var-font-color)");
         this.show();
 
@@ -110,7 +112,7 @@ export default class CompilePanel {
         } else {
             this.#displayBuildLog();
         }
-
+        this.#loader.style.visibility = "hidden";
         this.#generateEditorHeight();
     }
 

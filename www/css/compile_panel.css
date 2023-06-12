@@ -92,9 +92,8 @@
 }
 
 .compile_panel__console {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-    color: var(--var-font-color) !important;
+    display: flex;
+    flex-direction: row;
     padding-left: 8px;
     overflow: auto;
     height: 180px;
@@ -102,6 +101,12 @@
     min-height: 75%;
 }
 
-.compile_panel__console::-webkit-scrollbar {
+.compile_panel__console-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: var(--var-font-color) !important;
+}
+
+.compile_panel__console-text::-webkit-scrollbar {
     width: 0;
 }

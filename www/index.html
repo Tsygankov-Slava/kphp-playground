@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Fira+Code:wght@300&family=Inconsolata:wght@200&family=Source+Code+Pro:wght@200&family=Space+Mono&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Fira+Code:wght@300&family=Inconsolata:wght@200&family=Source+Code+Pro:wght@200&family=Space+Mono&family=Ubuntu+Mono&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css"/>
 
@@ -27,293 +28,348 @@
     <link rel="stylesheet" href="css/compile_panel.css">
     <link rel="stylesheet" href="css/settings_panel.css">
     <link rel="stylesheet" href="css/keyboards_shortcuts.css">
+    <link rel="stylesheet" href="css/loader.css">
 
-    <meta name="google-site-verification" content="SMmZtqBR-SOVM7T9eEzu0kRyOpsDuWrvSjDwYbL-pkc" />
-    <meta name="yandex-verification" content="98fd45425641c687" />
+    <meta name="google-site-verification" content="SMmZtqBR-SOVM7T9eEzu0kRyOpsDuWrvSjDwYbL-pkc"/>
+    <meta name="yandex-verification" content="98fd45425641c687"/>
 
 </head>
 <body>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+            if (document.scripts[j].src === r) {
+                return;
+            }
+        }
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym(93779592, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/93779592" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
+    ym(93779592, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true
+    });
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/93779592" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
 
-    <div class="main" id="main">
-        <div class="header">
-            <div class="header__inner">
-                <div class="header__logo">
-                    <span> KPHP Playground </span>
+<div class="main" id="main">
+    <div class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                <span> KPHP Playground </span>
+            </div>
+            <div class="header__contents">
+                <div class="header__documentation">
+                    <a href="https://vkcom.github.io/kphp/" target="_blank"> Documentation </a>
                 </div>
-                <div class="header__contents">
-                    <div class="header__documentation">
-                        <a href="https://vkcom.github.io/kphp/" target="_blank"> Documentation </a>
-                    </div>
-                    <div class="header__github">
-                        <a href="https://github.com/VKCOM/kphp" target="_blank"> GitHub </a>
-                    </div>
-                    <div class="header__tg">
-                        <a href="https://t.me/kphp_chat" target="_blank"> Telegram chat </a>
-                    </div>
-                    <div class="header__theme">
-                        <img src="images/dark/sun.png" id="header__theme__img">
-                    </div>
+                <div class="header__github">
+                    <a href="https://github.com/VKCOM/kphp" target="_blank"> GitHub </a>
                 </div>
-            </div>
-            <hr size="1px" width="100%" color="#B8B8B8" noshade>
-        </div>
-        <div class="header__vacuum"></div>
-        <div class="settings">
-            <div class ="settings__refresh">
-                <div class="settings__refresh-text"> Refresh </div>
-                <button class="settings__btn-refresh" id="settings__btn-refresh">
-                    <img src="images/dark/refresh.png" id="settings__btn-refresh__img">
-                </button>
-                <span class="tooltip-text">Allows you to give an example of the original form</span>
-            </div>
-            <div class="settings__examples">
-                <div class="settings__examples-text"> Examples: </div>
-                <button class="settings__examples-select" id="settings__examples-select">
-                    <span class="settings__examples-select-text" id="settings__examples-select-text"> Hello, KPHP! </span>
-                    <img src="images/dark/down-arrow.png" id="settings__examples-select__down-arrow">
-                </button>
-                <div class="settings__examples-select-content" id="settings__examples-select-content">
-                    <div class="settings__examples-select-content-text">
-                        <span class="settings__examples-select-text_">Hello, KPHP!</span>
-                    </div>
-                    <div class="settings__examples-select-content-text">
-                        <span class="settings__examples-select-text_">Fibonacci</span>
-                    </div>
-                    <div class="settings__examples-select-content-text">
-                        <span class="settings__examples-select-text_">Classes and Objects</span>
-                    </div>
-                    <div class="settings__examples-select-content-text">
-                        <span class="settings__examples-select-text_">Generic functions</span>
-                    </div>
-                    <div class="settings__examples-select-content-text">
-                        <span class="settings__examples-select-text_">Generic classes</span>
-                    </div>
-                    <div class="settings__examples-select-content-text">
-                        <span class="settings__examples-select-text_">Coroutines (forks)</span>
-                    </div>
-                    <div class="settings__examples-select-content-text">
-                        <span class="settings__examples-select-text_">JSON Encoding/Decoding</span>
-                    </div>
+                <div class="header__tg">
+                    <a href="https://t.me/kphp_chat" target="_blank"> Telegram chat </a>
                 </div>
-            </div>
-            <div class="settings__run-arguments">
-                <div class="settings__run-arguments__text"> Run arguments: </div>
-                <input class="settings__run-arguments__input" id="settings__run-arguments__input" type="text">
-            </div>
-            <div class="settings__format">
-                <button class="settings__btn-format" id="settings__btn-format">
-                    <span> { Format code } </span>
-                </button>
-            </div>
-            <div class="settings__run">
-                <button class="settings__btn-run" id="settings__btn-run">
-                    <img src="images/run-btn.png">
-                    <span> Run </span>
-                </button>
-            </div>
-            <div class="settings__settings">
-                <button class="settings__btn-settings" id="settings__btn-settings">
-                    <img src="images/dark/settings.png" id="settings__btn-settings__img">
-                </button>
+                <div class="header__theme">
+                    <img src="images/dark/sun.png" id="header__theme__img">
+                </div>
             </div>
         </div>
-        <textarea id="editor"></textarea>
-        <div class="compile_panel" id="compile_panel">
-            <div class="compile_panel__header" id="compile_panel__header">
-                <div class="compile_panel__header__run-text"> Run </div>
-                <div class="compile_panel__header__build-log-btn" id="compile_panel__header__build-log-btn">
-                    <span class="compile_panel__header__build-log-btn__text"> Build log </span>
+        <hr size="1px" width="100%" color="#B8B8B8" noshade>
+    </div>
+    <div class="header__vacuum"></div>
+    <div class="settings">
+        <div class="settings__refresh">
+            <div class="settings__refresh-text"> Refresh</div>
+            <button class="settings__btn-refresh" id="settings__btn-refresh">
+                <img src="images/dark/refresh.png" id="settings__btn-refresh__img">
+            </button>
+            <span class="tooltip-text">Allows you to give an example of the original form</span>
+        </div>
+        <div class="settings__examples">
+            <div class="settings__examples-text"> Examples:</div>
+            <button class="settings__examples-select" id="settings__examples-select">
+                <span class="settings__examples-select-text" id="settings__examples-select-text"> Hello, KPHP! </span>
+                <img src="images/dark/down-arrow.png" id="settings__examples-select__down-arrow">
+            </button>
+            <div class="settings__examples-select-content" id="settings__examples-select-content">
+                <div class="settings__examples-select-content-text">
+                    <span class="settings__examples-select-text_">Hello, KPHP!</span>
                 </div>
-                <div class="compile_panel__header__output-btn" id="compile_panel__header__output-btn">
-                    <span class="compile_panel__header__output-btn__text"> Output </span>
+                <div class="settings__examples-select-content-text">
+                    <span class="settings__examples-select-text_">Fibonacci</span>
                 </div>
-                <div class="compile_panel__header__btn-hide" id="compile_panel__header__btn-hide">
-                    <img class="compile_panel__header__img-hide" src="images/dark/hide-compile_panel-btn.png" id="compile_panel__header__img-hide">
+                <div class="settings__examples-select-content-text">
+                    <span class="settings__examples-select-text_">Classes and Objects</span>
+                </div>
+                <div class="settings__examples-select-content-text">
+                    <span class="settings__examples-select-text_">Generic functions</span>
+                </div>
+                <div class="settings__examples-select-content-text">
+                    <span class="settings__examples-select-text_">Generic classes</span>
+                </div>
+                <div class="settings__examples-select-content-text">
+                    <span class="settings__examples-select-text_">Coroutines (forks)</span>
+                </div>
+                <div class="settings__examples-select-content-text">
+                    <span class="settings__examples-select-text_">JSON Encoding/Decoding</span>
                 </div>
             </div>
-            <pre class="compile_panel__console" id="compile_panel__console"></pre>
         </div>
-        <div class="keyboards-shortcuts_help" id="keyboards-shortcuts_help">
-            <button class="keyboards-shortcuts_help_btn" id="keyboards-shortcuts_help_btn">?</button>
-            <div class="keyboards-shortcuts_help_content" id="keyboards-shortcuts_help_content">
-                <div class="keyboards-shortcuts_help_content__header">
-                    <div class="keyboards-shortcuts_help_content__header_name">
-                        Keyboards shortcuts
-                    </div>
-                    <div class="keyboards-shortcuts_help_content__header_close-btn" id="keyboards-shortcuts_help_content__header_close-btn">
-                        <img src="images/dark/close.png" id="keyboards-shortcuts_help_content__header_close-btn__img">
+        <div class="settings__run-arguments">
+            <div class="settings__run-arguments__text"> Run arguments:</div>
+            <input class="settings__run-arguments__input" id="settings__run-arguments__input" type="text">
+        </div>
+        <div class="settings__format">
+            <button class="settings__btn-format" id="settings__btn-format">
+                <span> { Format code } </span>
+            </button>
+        </div>
+        <div class="settings__run">
+            <button class="settings__btn-run" id="settings__btn-run">
+                <img src="images/run-btn.png">
+                <span> Run </span>
+            </button>
+        </div>
+        <div class="settings__settings">
+            <button class="settings__btn-settings" id="settings__btn-settings">
+                <img src="images/dark/settings.png" id="settings__btn-settings__img">
+            </button>
+        </div>
+    </div>
+    <textarea id="editor"></textarea>
+    <div class="compile_panel" id="compile_panel">
+        <div class="compile_panel__header" id="compile_panel__header">
+            <div class="compile_panel__header__run-text"> Run</div>
+            <div class="compile_panel__header__build-log-btn" id="compile_panel__header__build-log-btn">
+                <span class="compile_panel__header__build-log-btn__text"> Build log </span>
+            </div>
+            <div class="compile_panel__header__output-btn" id="compile_panel__header__output-btn">
+                <span class="compile_panel__header__output-btn__text"> Output </span>
+            </div>
+            <div class="compile_panel__header__btn-hide" id="compile_panel__header__btn-hide">
+                <img class="compile_panel__header__img-hide" src="images/dark/hide-compile_panel-btn.png"
+                     id="compile_panel__header__img-hide">
+            </div>
+        </div>
+        <div class="compile_panel__console">
+            <pre class="compile_panel__console-text" id="compile_panel__console-text"></pre>
+            <div id="ballsWaveG">
+                <div id="ballsWaveG_1" class="ballsWaveG"></div>
+                <div id="ballsWaveG_2" class="ballsWaveG"></div>
+                <div id="ballsWaveG_3" class="ballsWaveG"></div>
+            </div>
+        </div>
+    </div>
+    <div class="keyboards-shortcuts_help" id="keyboards-shortcuts_help">
+        <button class="keyboards-shortcuts_help_btn" id="keyboards-shortcuts_help_btn">?</button>
+        <div class="keyboards-shortcuts_help_content" id="keyboards-shortcuts_help_content">
+            <div class="keyboards-shortcuts_help_content__header">
+                <div class="keyboards-shortcuts_help_content__header_name">
+                    Keyboards shortcuts
+                </div>
+                <div class="keyboards-shortcuts_help_content__header_close-btn"
+                     id="keyboards-shortcuts_help_content__header_close-btn">
+                    <img src="images/dark/close.png" id="keyboards-shortcuts_help_content__header_close-btn__img">
+                </div>
+            </div>
+            <div class="keyboards-shortcuts_help_content__main">
+                <div class="keyboards-shortcuts_help_content__main_keyboard">
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-name">Run code</div>
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">
+                            ^
+                        </kdb>
+                        +
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">R</kdb>
                     </div>
                 </div>
-                <div class="keyboards-shortcuts_help_content__main">
-                    <div class="keyboards-shortcuts_help_content__main_keyboard">
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-name">Run code</div>
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
-                            <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">^</kdb> + <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">R</kdb>
-                        </div>
+                <div class="keyboards-shortcuts_help_content__main_keyboard">
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-name">Format code</div>
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">
+                            ^
+                        </kdb>
+                        +
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">F</kdb>
                     </div>
-                    <div class="keyboards-shortcuts_help_content__main_keyboard">
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-name">Format code</div>
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
-                            <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">^</kdb> + <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">F</kdb>
-                        </div>
+                </div>
+                <div class="keyboards-shortcuts_help_content__main_keyboard">
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-name">Change font size</div>
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">
+                            ^
+                        </kdb>
+                        +
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">+/-</kdb>
                     </div>
-                    <div class="keyboards-shortcuts_help_content__main_keyboard">
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-name">Change font size</div>
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
-                            <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">^</kdb> + <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">+/-</kdb>
-                        </div>
+                </div>
+                <div class="keyboards-shortcuts_help_content__main_keyboard">
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-name">Open/Close terminal</div>
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">
+                            ^
+                        </kdb>
+                        +
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">T</kdb>
                     </div>
-                    <div class="keyboards-shortcuts_help_content__main_keyboard">
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-name">Open/Close terminal</div>
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
-                            <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">^</kdb> + <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">T</kdb>
-                        </div>
+                </div>
+                <div class="keyboards-shortcuts_help_content__main_keyboard">
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-name">Open/Close settings</div>
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">
+                            ^
+                        </kdb>
+                        +
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">S</kdb>
                     </div>
-                    <div class="keyboards-shortcuts_help_content__main_keyboard">
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-name">Open/Close settings</div>
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
-                            <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">^</kdb> + <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">S</kdb>
-                        </div>
-                    </div>
-                    <div class="keyboards-shortcuts_help_content__main_keyboard">
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-name">Open/Close this help</div>
-                        <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
-                            <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">^</kdb> + <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">I</kdb>
-                        </div>
+                </div>
+                <div class="keyboards-shortcuts_help_content__main_keyboard">
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-name">Open/Close this help</div>
+                    <div class="keyboards-shortcuts_help_content__main_keyboard-combination">
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn keyboards-shortcuts_help_content__main_keyboard-combination-ctrl-btn">
+                            ^
+                        </kdb>
+                        +
+                        <kdb class="keyboards-shortcuts_help_content__main_keyboard-combination-btn">I</kdb>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="settings-panel" id="settings-panel">
-        <div class="settings-panel__header">
-            <div class="settings-panel__name"> Settings </div>
-            <div class="settings-panel__close">
-                <button class="settings-panel__close-btn" id="settings-panel__close-btn">
-                    <img src="images/dark/close.png" id="settings-panel__close-btn__img">
-                </button>
+</div>
+<div class="settings-panel" id="settings-panel">
+    <div class="settings-panel__header">
+        <div class="settings-panel__name"> Settings</div>
+        <div class="settings-panel__close">
+            <button class="settings-panel__close-btn" id="settings-panel__close-btn">
+                <img src="images/dark/close.png" id="settings-panel__close-btn__img">
+            </button>
+        </div>
+    </div>
+    <hr style="width: 100%; box-sizing: border-box; font-size: 0px; background: #B8B8B8; border: none; height: 1px;"/>
+    <div class="settings-panel__main">
+        <div class="settings-panel__main__font">
+            <div class="settings-panel__main__font-header">
+                <div class="settings-panel__main__font__text">
+                    Font
+                </div>
+                <div class="settings-panel__main__font__text-line">
+                    <hr class="hr"/>
+                </div>
+            </div>
+            <div class="settings-panel__main__font-main">
+                <div class="settings-panel__main__font-main__font">
+                    <div class="settings-panel__main__settings-name"> Font:</div>
+                    <div class="settings-panel__main__font-main__font-select">
+                        <button class="settings-panel__main__font-main__font-select-btn"
+                                id="settings-panel__main__font-main__font-select-btn">
+                            <span class="settings-panel__main__font-main__font-select-btn-text"
+                                  id="settings-panel__main__font-main__font-select-btn-text"></span>
+                            <img src="images/dark/down-arrow.png"
+                                 id="settings-panel__main__font-main__font-select-btn__img">
+                        </button>
+                        <div class="settings-panel__main__font-main-select-content"
+                             id="settings-panel__main__font-main-select-content">
+                            <div class="settings-panel__main__font-main-select-content-text">
+                                <span class="settings-panel__main__font-main-select-content-text_">JetBrains Mono</span>
+                            </div>
+                            <div class="settings-panel__main__font-main-select-content-text">
+                                <span class="settings-panel__main__font-main-select-content-text_">Source Code Pro</span>
+                            </div>
+                            <div class="settings-panel__main__font-main-select-content-text">
+                                <span class="settings-panel__main__font-main-select-content-text_">Space Mono</span>
+                            </div>
+                            <div class="settings-panel__main__font-main-select-content-text">
+                                <span class="settings-panel__main__font-main-select-content-text_">Anonymous Pro</span>
+                            </div>
+                            <div class="settings-panel__main__font-main-select-content-text">
+                                <span class="settings-panel__main__font-main-select-content-text_">Fira Code</span>
+                            </div>
+                            <div class="settings-panel__main__font-main-select-content-text">
+                                <span class="settings-panel__main__font-main-select-content-text_">Ubuntu Mono</span>
+                            </div>
+                            <div class="settings-panel__main__font-main-select-content-text">
+                                <span class="settings-panel__main__font-main-select-content-text_">Inconsolata</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-panel__main__font-main__size">
+                    <div class="settings-panel__main__settings-name"> Size:</div>
+                    <input class="settings-panel__main__font-main__size-input"
+                           id="settings-panel__main__font-main__size-input">
+                </div>
+                <div class="settings-panel__main__font-main__line-height">
+                    <div class="settings-panel__main__settings-name"> Line height:</div>
+                    <input class="settings-panel__main__font-main__line-height-input"
+                           id="settings-panel__main__font-main__line-height-input">
+                </div>
             </div>
         </div>
-        <hr style="width: 100%; box-sizing: border-box; font-size: 0px; background: #B8B8B8; border: none; height: 1px;" />
-        <div class="settings-panel__main">
-            <div class="settings-panel__main__font">
-                <div class="settings-panel__main__font-header">
-                    <div class="settings-panel__main__font__text">
-                        Font
-                    </div>
-                    <div class="settings-panel__main__font__text-line">
-                        <hr class="hr" />
-                    </div>
+        <div class="settings-panel__main__editor">
+            <div class="settings-panel__main__editor-header">
+                <div class="settings-panel__main__editor__text">
+                    Editor
                 </div>
-                <div class="settings-panel__main__font-main">
-                    <div class="settings-panel__main__font-main__font">
-                        <div class="settings-panel__main__settings-name"> Font: </div>
-                        <div class="settings-panel__main__font-main__font-select">
-                            <button class="settings-panel__main__font-main__font-select-btn" id="settings-panel__main__font-main__font-select-btn">
-                                <span class="settings-panel__main__font-main__font-select-btn-text" id="settings-panel__main__font-main__font-select-btn-text"></span>
-                                <img src="images/dark/down-arrow.png" id="settings-panel__main__font-main__font-select-btn__img">
-                            </button>
-                            <div class="settings-panel__main__font-main-select-content" id="settings-panel__main__font-main-select-content">
-                                <div class="settings-panel__main__font-main-select-content-text">
-                                    <span class="settings-panel__main__font-main-select-content-text_">JetBrains Mono</span>
-                                </div>
-                                <div class="settings-panel__main__font-main-select-content-text">
-                                    <span class="settings-panel__main__font-main-select-content-text_">Source Code Pro</span>
-                                </div>
-                                <div class="settings-panel__main__font-main-select-content-text">
-                                    <span class="settings-panel__main__font-main-select-content-text_">Space Mono</span>
-                                </div>
-                                <div class="settings-panel__main__font-main-select-content-text">
-                                    <span class="settings-panel__main__font-main-select-content-text_">Anonymous Pro</span>
-                                </div>
-                                <div class="settings-panel__main__font-main-select-content-text">
-                                    <span class="settings-panel__main__font-main-select-content-text_">Fira Code</span>
-                                </div>
-                                <div class="settings-panel__main__font-main-select-content-text">
-                                    <span class="settings-panel__main__font-main-select-content-text_">Ubuntu Mono</span>
-                                </div>
-                                <div class="settings-panel__main__font-main-select-content-text">
-                                    <span class="settings-panel__main__font-main-select-content-text_">Inconsolata</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="settings-panel__main__font-main__size">
-                        <div class="settings-panel__main__settings-name"> Size: </div>
-                        <input class="settings-panel__main__font-main__size-input" id="settings-panel__main__font-main__size-input">
-                    </div>
-                    <div class="settings-panel__main__font-main__line-height">
-                        <div class="settings-panel__main__settings-name"> Line height: </div>
-                        <input class="settings-panel__main__font-main__line-height-input" id="settings-panel__main__font-main__line-height-input">
-                    </div>
+                <div class="settings-panel__main__editor__text-line">
+                    <hr class="hr"/>
                 </div>
             </div>
-            <div class="settings-panel__main__editor">
-                <div class="settings-panel__main__editor-header">
-                    <div class="settings-panel__main__editor__text">
-                        Editor
-                    </div>
-                    <div class="settings-panel__main__editor__text-line">
-                        <hr class="hr" />
-                    </div>
-                </div>
-                <div class="settings-panel__main__editor-main">
-                    <div class="settings-panel__main__editor-main__theme">
-                        <div class="settings-panel__main__settings-name"> Theme: </div>
-                        <div class="settings-panel__main__editor-main__theme-select">
-                            <button class="settings-panel__main__editor-main__theme-select-btn" id="settings-panel__main__editor-main__theme-select-btn">
-                                <span class="settings-panel__main__editor-main__theme-select-btn-text" id="settings-panel__main__editor-main__theme-select-btn-text"></span>
-                                <img src="images/dark/down-arrow.png" id="settings-panel__main__editor-main__theme-select-btn__img">
-                            </button>
-                            <div class="settings-panel__main__editor-main__theme-select-content" id="settings-panel__main__editor-main__theme-select-content">
-                                <div class="settings-panel__main__editor-main__theme-select-content-text">
-                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">friendship-bracelet</span>
-                                </div>
-                                <div class="settings-panel__main__editor-main__theme-select-content-text">
-                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">darkpastel</span>
-                                </div>
-                                <div class="settings-panel__main__editor-main__theme-select-content-text">
-                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">monokai</span>
-                                </div>
-                                <div class="settings-panel__main__editor-main__theme-select-content-text">
-                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">nightlion</span>
-                                </div>
-                                <div class="settings-panel__main__editor-main__theme-select-content-text">
-                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">amy</span>
-                                </div>
-                                <div class="settings-panel__main__editor-main__theme-select-content-text">
-                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">oceanic</span>
-                                </div>
-                                <div class="settings-panel__main__editor-main__theme-select-content-text">
-                                    <span class="settings-panel__main__editor-main__theme-select-content-text_">idle</span>
-                                </div>
+            <div class="settings-panel__main__editor-main">
+                <div class="settings-panel__main__editor-main__theme">
+                    <div class="settings-panel__main__settings-name"> Theme:</div>
+                    <div class="settings-panel__main__editor-main__theme-select">
+                        <button class="settings-panel__main__editor-main__theme-select-btn"
+                                id="settings-panel__main__editor-main__theme-select-btn">
+                            <span class="settings-panel__main__editor-main__theme-select-btn-text"
+                                  id="settings-panel__main__editor-main__theme-select-btn-text"></span>
+                            <img src="images/dark/down-arrow.png"
+                                 id="settings-panel__main__editor-main__theme-select-btn__img">
+                        </button>
+                        <div class="settings-panel__main__editor-main__theme-select-content"
+                             id="settings-panel__main__editor-main__theme-select-content">
+                            <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                <span class="settings-panel__main__editor-main__theme-select-content-text_">friendship-bracelet</span>
+                            </div>
+                            <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                <span class="settings-panel__main__editor-main__theme-select-content-text_">darkpastel</span>
+                            </div>
+                            <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                <span class="settings-panel__main__editor-main__theme-select-content-text_">monokai</span>
+                            </div>
+                            <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                <span class="settings-panel__main__editor-main__theme-select-content-text_">nightlion</span>
+                            </div>
+                            <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                <span class="settings-panel__main__editor-main__theme-select-content-text_">amy</span>
+                            </div>
+                            <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                <span class="settings-panel__main__editor-main__theme-select-content-text_">oceanic</span>
+                            </div>
+                            <div class="settings-panel__main__editor-main__theme-select-content-text">
+                                <span class="settings-panel__main__editor-main__theme-select-content-text_">idle</span>
                             </div>
                         </div>
                     </div>
-                    <div class="settings-panel__main__editor-main__line-numbers">
-                        <div class="settings-panel__main__settings-name"> Line numbers: </div>
-                        <input type="checkbox" id="settings-panel__main__editor-main__line-numbers__checkbox" name="settings-panel__main__editor-main__line-numbers__checkbox">
-                    </div>
+                </div>
+                <div class="settings-panel__main__editor-main__line-numbers">
+                    <div class="settings-panel__main__settings-name"> Line numbers:</div>
+                    <input type="checkbox" id="settings-panel__main__editor-main__line-numbers__checkbox"
+                           name="settings-panel__main__editor-main__line-numbers__checkbox">
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
