@@ -7,8 +7,20 @@ export default class CodeRunner {
     #options;
     #result;
 
-    async run(code, runArguments) {
-        const data = { code: code, runArguments: runArguments };
+    async build(code) {
+        const data = { state: "build", code: code };
+        this.#options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        };
+        await this.#request();
+    }
+
+    async run(runArguments) {
+        const data = { state: "run", runArguments: runArguments };
         this.#options = {
             method: 'POST',
             headers: {

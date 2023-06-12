@@ -32,7 +32,7 @@ export default class KeyboardsShortcutsManager {
         const isCtrlPlus = event.ctrlKey && (event.key === "+" || event.key === "=");
         const isCtrlMinus = event.ctrlKey && (event.key === "-" || event.key === "_");
         if (isCtrlR) {
-            compilePanel.runCompile();
+            compilePanel.compile();
         } else if (isCtrlF) {
             formatter.format();
         } else if (isCtrlT) {

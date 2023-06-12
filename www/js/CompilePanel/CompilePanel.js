@@ -16,16 +16,21 @@ export default class CompilePanel {
 
     #codeRunner = new CodeRunner;
 
+    #buildingResult;
+    #runningResult;
+
     constructor() {
-        this.#hideBtn.addEventListener('click', this.hidden.bind(this) );
-        this.#runBtn.addEventListener('click', this.runCompile.bind(this));
+        this.#hideBtn.addEventListener('click', this.hidden.bind(this));
+        this.#runBtn.addEventListener('click', this.compile.bind(this));
 
         this.#buildLogBtn.addEventListener('click', this.#displayBuildLog.bind(this));
         this.#outputBtn.addEventListener('click', this.#displayOutput.bind(this));
 
         this.#runArgumentsInput.addEventListener('input', this.#saveValueToLocalStorage.bind(this));
 
-        this.#header.ondragstart = function() { return false; };
+        this.#header.ondragstart = function () {
+            return false;
+        };
         this.#trackMove();
 
         if (localStorage['runArguments']) {
@@ -34,6 +39,7 @@ export default class CompilePanel {
         if (localStorage['build_log']) {
             this.#setText(localStorage['build_log']);
         }
+        localStorage.setItem('state', "stable");
     }
 
     hidden() {
@@ -43,20 +49,23 @@ export default class CompilePanel {
 
     show() {
         this.#panel.style.visibility = "visible";
+        this.#displayBuildLog();
     }
 
     #setText(text) {
         this.#console.innerHTML = text;
     }
+
     #setTextColor(color) {
         this.#console.style = "color:" + color + " !important;";
     }
 
     #buildCompileTextForConsole(compilationOutput) {
+        console.log(compilationOutput);
         let compileTextForConsole = "";
 
         const serviceStrIndex = compilationOutput[0].indexOf("root");
-        if (serviceStrIndex != -1) {
+        if (serviceStrIndex !== -1) {
             compilationOutput[0] = compilationOutput[0].slice(serviceStrIndex + 4);
         }
         for (let i = 0; i < compilationOutput.length; i++) {
@@ -65,66 +74,89 @@ export default class CompilePanel {
         return compileTextForConsole;
     }
 
-    #displayCompileTextToConsole() {
-        let compileTextForConsole;
-        if (localStorage["isRunningCode"] === "false") {
-            const resultCompile = this.#codeRunner.getResult();
-            if (!resultCompile) {
-                compileTextForConsole = localStorage['output'];
-            } else {
-                let text = resultCompile["output"];
-                if (resultCompile["result_val_comp"]) {
-                    this.#displayBuildLogToConsole();
-                    text = "";
-                }
-                compileTextForConsole = this.#buildCompileTextForConsole(text);
-            }
+    async compile() {
+        localStorage.setItem("build_log", "");
+        localStorage.setItem("output", "");
+        localStorage.setItem("build_log_color", "var(--var-font-color)");
+        localStorage.setItem("state", "compile");
+        if (await this.#build()) {
+            await this.#run();
+
         } else {
-            compileTextForConsole = "Running code"
+            this.#loader.style.visibility = "hidden";
+            this.#setText(this.#buildingResult["build_log"]);
+            this.#setTextColor("red");
+            localStorage["build_log_color"] = "red";
+            localStorage["output"] = "";
         }
-        localStorage.setItem('output', compileTextForConsole);
-        this.#setText(compileTextForConsole);
+
+        this.#generateEditorHeight();
     }
 
-    #displayBuildLogToConsole() {
-        let buildLogForConsole;
-        if (localStorage["isRunningCode"] === "false") {
-            const resultCompile = this.#codeRunner.getResult();
-            if (resultCompile) {
-                if (resultCompile["result_val_comp"]) {
-                    this.#setTextColor("red");
-                }
-                buildLogForConsole = resultCompile["build_log"];
-            } else {
-                buildLogForConsole = localStorage["build_log"];
-            }
-        } else {
-            buildLogForConsole = "Running code";
-        }
-        localStorage.setItem('build_log', buildLogForConsole);
-        this.#setText(buildLogForConsole);
-    }
-
-    async runCompile() {
-        localStorage.setItem("isRunningCode", true);
-        const runArguments = this.#runArgumentsInput.value;
-
-        this.#displayBuildLog(false);
-        this.#setText("Running code");
-        this.#loader.style.visibility = "visible";
+    async #build() {
+        this.#setBuildLogInPanel();
+        this.#setText("Building code");
         this.#setTextColor("var(--var-font-color)");
+        this.#loader.style.visibility = "visible";
         this.show();
 
-        await this.#codeRunner.run(editor.getCode(), runArguments);
-        localStorage["isRunningCode"] = false;
-        if (!this.#codeRunner.getResult()['result_val_comp']) {
-            this.#displayOutput();
-        } else {
-            this.#displayBuildLog();
-        }
+        await this.#codeRunner.build(editor.getCode());
+        this.#buildingResult = this.#codeRunner.getResult();
+        const build_log = this.#buildingResult["build_log"];
+        localStorage["build_log"] = build_log;
+        this.#displayBuildLog();
+        return !this.#buildingResult["result_val_comp"];
+    }
 
-        this.#loader.style.visibility = "hidden";
-        this.#generateEditorHeight();
+    async #run() {
+        const runArguments = this.#runArgumentsInput.value;
+
+        this.#setOutputInPanel();
+        this.#setText("Running code");
+        this.#loader.style.visibility = "visible";
+
+        await this.#codeRunner.run(runArguments);
+        this.#runningResult = this.#codeRunner.getResult();
+        const output = this.#runningResult["output"];
+        localStorage["output"] = this.#buildCompileTextForConsole(output);
+        this.#displayOutput();
+    }
+
+    #setBuildLogInPanel() {
+        this.#outputBtn.style.borderBottom = "none";
+        this.#outputBtn.style.paddingTop = "0px";
+        this.#buildLogBtn.style.paddingTop = "2px";
+        this.#buildLogBtn.style.borderBottom = "solid 2px #0069c2";
+    }
+
+    #displayBuildLog() {
+        this.#setBuildLogInPanel();
+        if (localStorage["build_log"] !== "") {
+            this.#setText(localStorage["build_log"]);
+            this.#setTextColor(localStorage["build_log_color"]);
+            this.#loader.style.visibility = "hidden";
+        } else if (localStorage["state"] === "compile") {
+            this.#setText("Building code");
+            this.#loader.style.visibility = "visible";
+        }
+    }
+
+    #setOutputInPanel() {
+        this.#buildLogBtn.style.borderBottom = "none";
+        this.#buildLogBtn.style.paddingTop = "0px";
+        this.#outputBtn.style.paddingTop = "2px";
+        this.#outputBtn.style.borderBottom = "solid 2px #0069c2";
+    }
+
+    #displayOutput() {
+        this.#setOutputInPanel();
+        if (localStorage["output"] !== "") {
+            this.#setText(localStorage["output"]);
+            this.#loader.style.visibility = "hidden";
+        } else if (localStorage["build_log"] !== "") {
+            this.#setText("Running code");
+            this.#loader.style.visibility = "visible";
+        }
     }
 
     #generateEditorHeight() {
@@ -150,26 +182,6 @@ export default class CompilePanel {
         document.addEventListener('mouseup', () => {
             mouseDown = false;
         })
-    }
-
-    #displayBuildLog($callDisplayBuildLog = true) {
-        this.#outputBtn.style.borderBottom = "none";
-        this.#outputBtn.style.paddingTop = "0px";
-        this.#buildLogBtn.style.paddingTop = "2px";
-        this.#buildLogBtn.style.borderBottom = "solid 2px #0069c2";
-
-        if ($callDisplayBuildLog) {
-            this.#displayBuildLogToConsole();
-        }
-    }
-
-    #displayOutput() {
-        this.#buildLogBtn.style.borderBottom = "none";
-        this.#buildLogBtn.style.paddingTop = "0px";
-        this.#outputBtn.style.paddingTop = "2px";
-        this.#outputBtn.style.borderBottom = "solid 2px #0069c2";
-
-        this.#displayCompileTextToConsole();
     }
 
     #saveValueToLocalStorage() {
