@@ -46,10 +46,10 @@ if (isset($_POST)) {
      * @param mixed $runArguments
      */
     function run(&$output_run, int &$result_val, $runArguments) {
-        $command = "./kphp_out/cli " . $runArguments . " 2>&1 --Xkphp-options -u root";
+        $command = "./kphp_out/cli " . $runArguments . " 2>&1 --Xkphp-options -u root -o";
 
         // for debug
-        //$command = "./kphp_out/cli " . $runArguments . " 2>&1";
+        // $command = "./kphp_out/cli " . $runArguments . " 2>&1 --Xkphp-options -o";
 
         exec($command, $output_run, $result_val);
     }
