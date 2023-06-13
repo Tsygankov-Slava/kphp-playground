@@ -39,6 +39,9 @@ export default class CompilePanel {
         if (localStorage['build_log']) {
             this.#setText(localStorage['build_log']);
         }
+        if (!localStorage['filename']) {
+            localStorage.setItem('filename', "");
+        }
         localStorage.setItem('state', "stable");
     }
 
@@ -100,10 +103,11 @@ export default class CompilePanel {
         this.#loader.style.visibility = "visible";
         this.show();
 
-        await this.#codeRunner.build(editor.getCode());
+        await this.#codeRunner.build(editor.getCode(), localStorage["filename"]);
         this.#buildingResult = this.#codeRunner.getResult();
         const build_log = this.#buildingResult["build_log"];
         localStorage["build_log"] = build_log;
+        localStorage["filename"] = this.#buildingResult["filename"];
         this.#displayBuildLog();
         return !this.#buildingResult["result_val_comp"];
     }
@@ -116,7 +120,7 @@ export default class CompilePanel {
         this.#setTextColor("var(--var-font-color)");
         this.#loader.style.visibility = "visible";
 
-        await this.#codeRunner.run(runArguments);
+        await this.#codeRunner.run(localStorage["filename"], runArguments);
         this.#runningResult = this.#codeRunner.getResult();
         const output = this.#runningResult["output"];
         localStorage["output"] = this.#buildCompileTextForConsole(output);

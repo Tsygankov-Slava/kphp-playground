@@ -20,36 +20,46 @@ if (isset($_POST)) {
         return !empty($obj["runArguments"]) ? $obj["runArguments"] : "";
     }
 
+    function generateFilename(): string {
+        return md5(rand());
+    }
+
     /**
      * @param mixed $code
+     * @param mixed $filename
      */
-    function createFileWithCode($code) {
-        $file = fopen("code.php", "w");
+    function createFileWithCode($code, &$filename) {
+        if (empty($filename)) {
+            $filename = generateFilename();
+        }
+        $file = fopen("cli_files/" . $filename . ".php", "w");
         fwrite($file, $code);
         fclose($file);
     }
 
     /**
      * @param mixed $output_comp
+     * @param mixed $filename
      */
-    function compile(&$output_comp, int &$result_val_comp) {
-        $command = "kphp -M cli ./code.php 2>&1";
+    function compile(&$output_comp, int &$result_val_comp, $filename) {
+        $command = "cd cli_files; kphp -M cli -o " . $filename . " " . $filename . ".php 2>&1";
 
         // for debug
-        // $command = "/Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli ./code.php 2>&1";
+        //$command = "cd cli_files;  /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli -o" . $filename . " " . $filename . ".php 2>&1";
 
         exec($command, $output_comp, $result_val_comp);
     }
 
     /**
      * @param mixed $output_run
+     * @param mixed $filename
      * @param mixed $runArguments
      */
-    function run(&$output_run, int &$result_val, $runArguments) {
-        $command = "./kphp_out/cli " . $runArguments . " 2>&1 --Xkphp-options -u root -o";
+    function run(&$output_run, int &$result_val, $filename, $runArguments) {
+        $command = "cd cli_files; ./" . $filename . " " . $runArguments . " 2>&1 --Xkphp-options -u root -o";
 
         // for debug
-        // $command = "./kphp_out/cli " . $runArguments . " 2>&1 --Xkphp-options -o";
+        // $command = "cd cli_files; ./" . $filename . " " . $runArguments . " 2>&1 --Xkphp-options -o";
 
         exec($command, $output_run, $result_val);
     }
@@ -60,9 +70,10 @@ if (isset($_POST)) {
         $result_val_comp = 1;
 
         $code = getCode($obj);
+        $filename = $obj["filename"];
         if (!empty($code)) {
-            createFileWithCode($code);
-            compile($output_comp, $result_val_comp);
+            createFileWithCode($code, $filename);
+            compile($output_comp, $result_val_comp, $filename);
         }
 
         $output_comp_str = "";
@@ -71,6 +82,7 @@ if (isset($_POST)) {
         }
 
         $result = array(
+            "filename" => $filename,
             "build_log" => $output_comp_str,
             "result_val_comp" => $result_val_comp,
         );
@@ -80,8 +92,9 @@ if (isset($_POST)) {
         $output_run = [];
         $result_val_exec = 1;
 
+        $filename = $obj["filename"];
         $runArguments = getRunArguments($obj);
-        run($output_run, $result_val_exec, $runArguments);
+        run($output_run, $result_val_exec, $filename, $runArguments);
 
         $result = array(
             "output" => $output_run,

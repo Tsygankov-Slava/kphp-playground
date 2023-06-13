@@ -7,8 +7,8 @@ export default class CodeRunner {
     #options;
     #result;
 
-    async build(code) {
-        const data = { state: "build", code: code };
+    async build(code, filename) {
+        const data = { state: "build", filename: filename, code: code };
         this.#options = {
             method: 'POST',
             headers: {
@@ -19,8 +19,8 @@ export default class CodeRunner {
         await this.#request();
     }
 
-    async run(runArguments) {
-        const data = { state: "run", runArguments: runArguments };
+    async run(filename, runArguments) {
+        const data = { state: "run", filename: filename, runArguments: runArguments };
         this.#options = {
             method: 'POST',
             headers: {
