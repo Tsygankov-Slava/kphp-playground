@@ -31,7 +31,7 @@ if (isset($_POST)) {
     function createFileWithCode($code, &$filename) {
         if (empty($filename)) {
             $filename = generateFilename();
-        }
+	}
         $file = fopen("cli_files/" . $filename . ".php", "w");
         fwrite($file, $code);
         fclose($file);
@@ -42,10 +42,10 @@ if (isset($_POST)) {
      * @param mixed $filename
      */
     function compile(&$output_comp, int &$result_val_comp, $filename) {
-        $command = "cd cli_files; kphp -M cli -o " . $filename . " " . $filename . ".php 2>&1";
+        $command = "cd cli_files/; kphp -M cli -o " . $filename . " " . $filename . ".php 2>&1";
 
         // for debug
-        //$command = "cd cli_files;  /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli -o" . $filename . " " . $filename . ".php 2>&1";
+        //$command = "cd cli_files/; /Users/tv/KPHP/kphp/objs/bin/kphp2cpp -M cli -o" . $filename . " " . $filename . ".php 2>&1";
 
         exec($command, $output_comp, $result_val_comp);
     }
@@ -56,10 +56,10 @@ if (isset($_POST)) {
      * @param mixed $runArguments
      */
     function run(&$output_run, int &$result_val, $filename, $runArguments) {
-        $command = "cd cli_files; ./" . $filename . " " . $runArguments . " 2>&1 --Xkphp-options -u root -o";
+        $command = "cd cli_files/; ./" . $filename . " " . $runArguments . " 2>&1 --Xkphp-options -u root";
 
         // for debug
-        // $command = "cd cli_files; ./" . $filename . " " . $runArguments . " 2>&1 --Xkphp-options -o";
+        // $command = "cd cli_files/; ./" . $filename . " " . $runArguments . " 2>&1 --Xkphp-options";
 
         exec($command, $output_run, $result_val);
     }
@@ -92,7 +92,7 @@ if (isset($_POST)) {
         $output_run = [];
         $result_val_exec = 1;
 
-        $filename = $obj["filename"];
+	$filename = $obj["filename"];
         $runArguments = getRunArguments($obj);
         run($output_run, $result_val_exec, $filename, $runArguments);
 
